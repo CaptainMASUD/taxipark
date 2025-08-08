@@ -1,0 +1,21 @@
+const SalesPage = () => {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-gray-900">Sales</h1>
+        <button className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-purple-700 hover:to-indigo-700 transition-colors">
+          Export Report
+        </button>
+      </div>
+
+      <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="text-center py-12">
+          <h2 className="text-lg font-semibold text-gray-700 mb-2">Sales Dashboard</h2>
+          <p className="text-gray-500">Sales analytics and reporting tools will be displayed here.</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default SalesPage
