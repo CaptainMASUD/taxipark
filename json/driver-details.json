@@ -1,0 +1,178 @@
+{
+  "en": {
+    "header": {
+      "back_to": "Back to Drivers",
+      "breadcrumb_left": "Drivers",
+      "breadcrumb_arrow": "→",
+      "breadcrumb_right": "Driver's Details",
+      "requested_id": "Requested ID: {{id}}",
+      "title_fallback": "Driver's Details"
+    },
+    "profile": {
+      "role_and_license": "Driver • License: {{license}}",
+      "actual_id": "Actual Driver ID: {{id}}",
+      "id_match_ok": "✅ Correct driver loaded",
+      "id_match_bad": "❌ ID mismatch detected",
+      "status_chip_active": "● Active",
+      "status_chip_inactive": "● Inactive"
+    },
+    "stats": {
+      "connection_status_label": "Connection Status",
+      "connection_status_online": "Online",
+      "connection_status_offline": "Offline",
+      "email_label": "Email",
+      "phone_label": "Phone",
+      "taxi_park_id_label": "Taxi Park ID",
+      "price_per_km_label": "Price per km",
+      "price_per_km_value": "BYN {{value}}"
+    },
+    "sections": {
+      "basic_details": "Basic Details",
+      "personal_details": "Personal Details",
+      "id_details": "ID Details"
+    },
+    "fields": {
+      "name": "Full Name",
+      "phone": "Phone Number",
+      "address": "Address",
+      "drivingExperience": "Driving Experience",
+      "licenseNumber": "Driver License Number",
+      "countryOfIssue": "Country of Issue",
+      "drivingLicenseIssuedOn": "License Issued On",
+      "drivingLicenseExpeiresOn": "License Expires On",
+      "emergencyContact": "Emergency Contact",
+      "dateOfBirth": "Date of Birth",
+      "feedback": "Feedback",
+      "notes": "Notes",
+      "passportType": "Passport Type",
+      "country": "Country",
+      "issuedBy": "Issued By",
+      "registrationAddress": "Registration Address",
+      "taxpayerId": "Taxpayer ID",
+      "idSeriesAndNumber": "ID Series and Number",
+      "primaryStateRegistrationNumber": "Primary State Registration Number",
+      "postCode": "Post Code",
+      "iDIssuedOn": "ID Issued On",
+      "iDexpiresOn": "ID Expires On"
+    },
+    "buttons": {
+      "toggle_section_aria": "Toggle section",
+      "try_again": "Try Again",
+      "back_to_drivers": "Back to Drivers",
+      "save_details": "Save Details",
+      "saving": "Saving..."
+    },
+    "loading": {
+      "spinner_text": "Loading driver details (ID: {{id}})..."
+    },
+    "empty": {
+      "not_found_title": "Driver not found",
+      "requested_id": "Requested driver ID: {{id}}"
+    },
+    "errors": {
+      "generic_prefix": "Failed to fetch driver details: {{message}}",
+      "no_id": "No driver ID provided",
+      "workaround_note": "Using workaround: Fetching all drivers and filtering by ID"
+    },
+    "toasts": {
+      "no_id_update": "No driver ID available for update",
+      "update_success": "Driver details updated successfully",
+      "update_error": "Failed to update driver: {{message}}"
+    },
+    "aria": {
+      "back_button": "Go back to drivers",
+      "save_button": "Save driver details"
+    },
+    "placeholders": {
+      "drivingExperience": "e.g., 5 years"
+    }
+  },
+  "ru": {
+    "header": {
+      "back_to": "Назад к водителям",
+      "breadcrumb_left": "Водители",
+      "breadcrumb_arrow": "→",
+      "breadcrumb_right": "Данные водителя",
+      "requested_id": "Запрошенный ID: {{id}}",
+      "title_fallback": "Данные водителя"
+    },
+    "profile": {
+      "role_and_license": "Водитель • Удостоверение: {{license}}",
+      "actual_id": "Фактический ID водителя: {{id}}",
+      "id_match_ok": "✅ Загружен корректный водитель",
+      "id_match_bad": "❌ Обнаружено несоответствие ID",
+      "status_chip_active": "● Активен",
+      "status_chip_inactive": "● Неактивен"
+    },
+    "stats": {
+      "connection_status_label": "Статус подключения",
+      "connection_status_online": "Онлайн",
+      "connection_status_offline": "Оффлайн",
+      "email_label": "Эл. почта",
+      "phone_label": "Телефон",
+      "taxi_park_id_label": "ID таксопарка",
+      "price_per_km_label": "Цена за км",
+      "price_per_km_value": "BYN {{value}}"
+    },
+    "sections": {
+      "basic_details": "Основные данные",
+      "personal_details": "Личные данные",
+      "id_details": "Данные удостоверений"
+    },
+    "fields": {
+      "name": "Полное имя",
+      "phone": "Номер телефона",
+      "address": "Адрес",
+      "drivingExperience": "Стаж вождения",
+      "licenseNumber": "Номер водительского удостоверения",
+      "countryOfIssue": "Страна выдачи",
+      "drivingLicenseIssuedOn": "Дата выдачи удостоверения",
+      "drivingLicenseExpeiresOn": "Срок действия удостоверения",
+      "emergencyContact": "Экстренный контакт",
+      "dateOfBirth": "Дата рождения",
+      "feedback": "Отзыв",
+      "notes": "Заметки",
+      "passportType": "Тип паспорта",
+      "country": "Страна",
+      "issuedBy": "Кем выдан",
+      "registrationAddress": "Адрес регистрации",
+      "taxpayerId": "ИНН",
+      "idSeriesAndNumber": "Серия и номер удостоверения",
+      "primaryStateRegistrationNumber": "Основной гос. регистрационный номер",
+      "postCode": "Почтовый индекс",
+      "iDIssuedOn": "Дата выдачи ID",
+      "iDexpiresOn": "Срок действия ID"
+    },
+    "buttons": {
+      "toggle_section_aria": "Свернуть/развернуть раздел",
+      "try_again": "Повторить",
+      "back_to_drivers": "Назад к водителям",
+      "save_details": "Сохранить данные",
+      "saving": "Сохранение..."
+    },
+    "loading": {
+      "spinner_text": "Загрузка данных водителя (ID: {{id}})..."
+    },
+    "empty": {
+      "not_found_title": "Водитель не найден",
+      "requested_id": "Запрошенный ID водителя: {{id}}"
+    },
+    "errors": {
+      "generic_prefix": "Не удалось получить данные водителя: {{message}}",
+      "no_id": "ID водителя не указан",
+      "workaround_note": "Обходной путь: получаем всех водителей и фильтруем по ID"
+    },
+    "toasts": {
+      "no_id_update": "Нет ID водителя для обновления",
+      "update_success": "Данные водителя успешно обновлены",
+      "update_error": "Не удалось обновить данные водителя: {{message}}"
+    },
+    "aria": {
+      "back_button": "Вернуться к водителям",
+      "save_button": "Сохранить данные водителя"
+    },
+    "placeholders": {
+      "drivingExperience": "например, 5 лет"
+    }
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "en": {
+    "header": {
+      "back_to": "Back to Drivers",
+      "breadcrumb_left": "Drivers",
+      "breadcrumb_arrow": "→",
+      "breadcrumb_right": "Add New Driver",
+      "title": "Add New Driver"
+    },
+    "sections": {
+      "basic_details": "Basic Details",
+      "personal_details": "Personal Details",
+      "id_details": "ID Details"
+    },
+    "fields": {
+      "name": "Full Name *",
+      "email": "Email *",
+      "phone": "Phone Number *",
+      "password": "Password *",
+      "address": "Address",
+      "emergencyContact": "Emergency Contact",
+      "dateOfBirth": "Date of Birth",
+      "licenseNumber": "Driver License Number",
+      "countryOfIssue": "Country of Issue",
+      "drivingLicenseIssuedOn": "License Issued On",
+      "drivingLicenseExpeiresOn": "License Expires On",
+      "drivingExperience": "Driving Experience",
+      "status": "Status",
+      "passportType": "Passport Type",
+      "country": "Country",
+      "issuedBy": "Issued By",
+      "registrationAddress": "Registration Address",
+      "taxpayerId": "Taxpayer ID",
+      "idSeriesAndNumber": "ID Series and Number",
+      "primaryStateRegistrationNumber": "Primary State Registration Number",
+      "postCode": "Post Code",
+      "iDIssuedOn": "ID Issued On",
+      "iDexpiresOn": "ID Expires On",
+      "notes": "Notes",
+      "feedback": "Feedback"
+    },
+    "selects": {
+      "status": {
+        "placeholder": "Select Status",
+        "options": {
+          "active": "Active",
+          "inactive": "Inactive",
+          "pending": "Pending"
+        }
+      }
+    },
+    "placeholders": {
+      "name": "Enter full name",
+      "email": "Enter email address",
+      "phone": "Enter phone number",
+      "password": "Enter password (min 6 characters)",
+      "address": "Enter full address",
+      "emergencyContact": "Enter emergency contact",
+      "drivingExperience": "e.g., 5 years",
+      "licenseNumber": "Enter license number",
+      "countryOfIssue": "Enter country of issue",
+      "registrationAddress": "Enter registration address",
+      "taxpayerId": "Enter taxpayer ID",
+      "idSeriesAndNumber": "Enter ID series and number",
+      "primaryStateRegistrationNumber": "Enter registration number",
+      "postCode": "Enter post code",
+      "notes": "Enter any additional notes",
+      "passportType": "Enter passport type",
+      "country": "Enter country",
+      "issuedBy": "Enter issuing authority"
+    },
+    "buttons": {
+      "toggle_section_aria": "Toggle section",
+      "submit": "Add Driver"
+    },
+    "toasts": {
+      "error_add": "Failed to add driver",
+      "success_add": "Driver added successfully"
+    },
+    "validation": {
+      "name_required": "Name is required",
+      "email_required": "Email is required",
+      "phone_required": "Phone is required",
+      "password_required": "Password is required",
+      "password_min_length": "Password must be at least 6 characters"
+    },
+    "aria": {
+      "back_button": "Go back to drivers",
+      "submit_button": "Save driver"
+    }
+  },
+  "ru": {
+    "header": {
+      "back_to": "Назад к водителям",
+      "breadcrumb_left": "Водители",
+      "breadcrumb_arrow": "→",
+      "breadcrumb_right": "Добавить водителя",
+      "title": "Добавить нового водителя"
+    },
+    "sections": {
+      "basic_details": "Основные данные",
+      "personal_details": "Личные данные",
+      "id_details": "Данные удостоверений"
+    },
+    "fields": {
+      "name": "Полное имя *",
+      "email": "Электронная почта *",
+      "phone": "Номер телефона *",
+      "password": "Пароль *",
+      "address": "Адрес",
+      "emergencyContact": "Экстренный контакт",
+      "dateOfBirth": "Дата рождения",
+      "licenseNumber": "Номер водительского удостоверения",
+      "countryOfIssue": "Страна выдачи",
+      "drivingLicenseIssuedOn": "Дата выдачи удостоверения",
+      "drivingLicenseExpeiresOn": "Срок действия удостоверения",
+      "drivingExperience": "Стаж вождения",
+      "status": "Статус",
+      "passportType": "Тип паспорта",
+      "country": "Страна",
+      "issuedBy": "Кем выдан",
+      "registrationAddress": "Адрес регистрации",
+      "taxpayerId": "ИНН",
+      "idSeriesAndNumber": "Серия и номер удостоверения",
+      "primaryStateRegistrationNumber": "Основной гос. рег. номер",
+      "postCode": "Почтовый индекс",
+      "iDIssuedOn": "Дата выдачи ID",
+      "iDexpiresOn": "Срок действия ID",
+      "notes": "Заметки",
+      "feedback": "Отзыв"
+    },
+    "selects": {
+      "status": {
+        "placeholder": "Выберите статус",
+        "options": {
+          "active": "Активен",
+          "inactive": "Неактивен",
+          "pending": "Ожидает"
+        }
+      }
+    },
+    "placeholders": {
+      "name": "Введите полное имя",
+      "email": "Введите электронную почту",
+      "phone": "Введите номер телефона",
+      "password": "Введите пароль (не менее 6 символов)",
+      "address": "Введите полный адрес",
+      "emergencyContact": "Введите экстренный контакт",
+      "drivingExperience": "например, 5 лет",
+      "licenseNumber": "Введите номер удостоверения",
+      "countryOfIssue": "Введите страну выдачи",
+      "registrationAddress": "Введите адрес регистрации",
+      "taxpayerId": "Введите ИНН",
+      "idSeriesAndNumber": "Введите серию и номер",
+      "primaryStateRegistrationNumber": "Введите рег. номер",
+      "postCode": "Введите почтовый индекс",
+      "notes": "Введите дополнительные заметки",
+      "passportType": "Введите тип паспорта",
+      "country": "Введите страну",
+      "issuedBy": "Введите орган, выдавший документ"
+    },
+    "buttons": {
+      "toggle_section_aria": "Свернуть/развернуть раздел",
+      "submit": "Добавить водителя"
+    },
+    "toasts": {
+      "error_add": "Не удалось добавить водителя",
+      "success_add": "Водитель успешно добавлен"
+    },
+    "validation": {
+      "name_required": "Требуется имя",
+      "email_required": "Требуется электронная почта",
+      "phone_required": "Требуется номер телефона",
+      "password_required": "Требуется пароль",
+      "password_min_length": "Пароль должен быть не менее 6 символов"
+    },
+    "aria": {
+      "back_button": "Вернуться к водителям",
+      "submit_button": "Сохранить водителя"
+    }
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "en": {
+    "title": "Vehicles",
+    "search": {
+      "placeholder": "Search vehicles...",
+      "refresh_aria": "Refresh vehicles"
+    },
+    "buttons": {
+      "add_vehicle": "Add Vehicle",
+      "retry": "Retry",
+      "connect_all": "Connect All",
+      "disconnect_all": "Disconnect All",
+      "previous": "Previous",
+      "next": "Next",
+      "page_number": "{{n}}"
+    },
+    "loading": {
+      "table": "Loading vehicles...",
+      "details_modal": "Loading vehicle details..."
+    },
+    "errors": {
+      "fetch_failed": "Failed to fetch vehicles",
+      "generic": "Something went wrong",
+      "toast_fetch_failed": "Failed to fetch vehicles"
+    },
+    "bulk": {
+      "selected_count": "{{count}} selected",
+      "updated_n": "Updated {{count}} vehicles",
+      "updating": "Updating selected vehicles…"
+    },
+    "connection": {
+      "label": "Connection",
+      "active": "Active",
+      "inactive": "Inactive",
+      "updated": "Vehicle connection status updated",
+      "update_failed": "Failed to update connection status"
+    },
+    "table": {
+      "select_all_aria": "Select all filtered vehicles",
+      "col": {
+        "make_model": "Make & Model",
+        "plate_number": "Plate Number",
+        "color": "Color",
+        "seats": "Seats",
+        "vin": "VIN",
+        "connection": "Connection",
+        "actions": "Actions"
+      },
+      "row": {
+        "code": "Code: {{code}}",
+        "id": "ID: {{id}}"
+      },
+      "actions": {
+        "edit_aria": "Open {{make}} {{model}} details",
+        "more_for": "More options for {{make}} {{model}}"
+      },
+      "empty": {
+        "no_results_with_query": "No vehicles found matching your search.",
+        "no_results": "No vehicles found."
+      },
+      "showing_count": "Showing {{showing}} of {{total}} vehicles"
+    },
+    "debug": {
+      "found_count": "Debug: Found {{count}} vehicles. First vehicle ID: {{firstId}}"
+    },
+    "modal": {
+      "loading_title": "Loading",
+      "loading_message": "{{message}}"
+    },
+    "toasts": {
+      "create_success": "Vehicle added successfully",
+      "create_error": "Failed to add vehicle",
+      "bulk_update_error": "Failed to update vehicles",
+      "id_missing": "Vehicle ID not found"
+    },
+    "labels": {
+      "active_badge": "Active",
+      "inactive_badge": "Inactive"
+    },
+    "aria": {
+      "search_input": "Search vehicles",
+      "open_add_vehicle": "Open add vehicle form",
+      "select_vehicle_row": "Select vehicle {{id}}",
+      "toggle_connection": "Toggle connection for vehicle {{id}}"
+    }
+  },
+  "ru": {
+    "title": "Автомобили",
+    "search": {
+      "placeholder": "Поиск автомобилей...",
+      "refresh_aria": "Обновить список автомобилей"
+    },
+    "buttons": {
+      "add_vehicle": "Добавить авто",
+      "retry": "Повторить",
+      "connect_all": "Подключить все",
+      "disconnect_all": "Отключить все",
+      "previous": "Назад",
+      "next": "Вперёд",
+      "page_number": "{{n}}"
+    },
+    "loading": {
+      "table": "Загрузка автомобилей...",
+      "details_modal": "Загрузка деталей автомобиля..."
+    },
+    "errors": {
+      "fetch_failed": "Не удалось загрузить автомобили",
+      "generic": "Произошла ошибка",
+      "toast_fetch_failed": "Не удалось загрузить автомобили"
+    },
+    "bulk": {
+      "selected_count": "Выбрано: {{count}}",
+      "updated_n": "Обновлено {{count}} авто",
+      "updating": "Обновление выбранных автомобилей…"
+    },
+    "connection": {
+      "label": "Подключение",
+      "active": "Активно",
+      "inactive": "Неактивно",
+      "updated": "Статус подключения обновлён",
+      "update_failed": "Не удалось изменить статус подключения"
+    },
+    "table": {
+      "select_all_aria": "Выбрать все отфильтрованные автомобили",
+      "col": {
+        "make_model": "Марка и модель",
+        "plate_number": "Госномер",
+        "color": "Цвет",
+        "seats": "Места",
+        "vin": "VIN",
+        "connection": "Подключение",
+        "actions": "Действия"
+      },
+      "row": {
+        "code": "Код: {{code}}",
+        "id": "ID: {{id}}"
+      },
+      "actions": {
+        "edit_aria": "Открыть детали {{make}} {{model}}",
+        "more_for": "Доп. параметры для {{make}} {{model}}"
+      },
+      "empty": {
+        "no_results_with_query": "По вашему запросу автомобили не найдены.",
+        "no_results": "Автомобили не найдены."
+      },
+      "showing_count": "Показано {{showing}} из {{total}}"
+    },
+    "debug": {
+      "found_count": "Отладка: найдено {{count}} авто. ID первого: {{firstId}}"
+    },
+    "modal": {
+      "loading_title": "Загрузка",
+      "loading_message": "{{message}}"
+    },
+    "toasts": {
+      "create_success": "Автомобиль успешно добавлен",
+      "create_error": "Не удалось добавить автомобиль",
+      "bulk_update_error": "Не удалось обновить автомобили",
+      "id_missing": "ID автомобиля не найден"
+    },
+    "labels": {
+      "active_badge": "Активно",
+      "inactive_badge": "Неактивно"
+    },
+    "aria": {
+      "search_input": "Поиск автомобилей",
+      "open_add_vehicle": "Открыть форму добавления автомобиля",
+      "select_vehicle_row": "Выбрать автомобиль {{id}}",
+      "toggle_connection": "Переключить подключение для авто {{id}}"
+    }
+  }
+}

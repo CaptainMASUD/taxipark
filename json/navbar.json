@@ -1,0 +1,94 @@
+{
+  "en": {
+    "search": {
+      "placeholder": "Search",
+      "aria_label": "Search"
+    },
+    "notifications": {
+      "aria_label": "Notifications",
+      "badge_alt": "{{count}} unread notifications"
+    },
+    "language": {
+      "selector_label": "Language",
+      "menu_aria_label": "Select language",
+      "selected": "{{name}}",
+      "dropdown_indicator": "Open language menu",
+      "reset_hint": "Language changed to: {{name}}",
+      "list": {
+        "en": { "name": "English", "flag": "🇺🇸" },
+        "es": { "name": "Español", "flag": "🇪🇸" },
+        "fr": { "name": "Français", "flag": "🇫🇷" },
+        "de": { "name": "Deutsch", "flag": "🇩🇪" },
+        "it": { "name": "Italiano", "flag": "🇮🇹" },
+        "pt": { "name": "Português", "flag": "🇵🇹" },
+        "ru": { "name": "Русский", "flag": "🇷🇺" },
+        "zh": { "name": "中文", "flag": "🇨🇳" },
+        "ja": { "name": "日本語", "flag": "🇯🇵" },
+        "ar": { "name": "العربية", "flag": "🇸🇦" }
+      }
+    },
+    "user_menu": {
+      "avatar_alt": "User avatar",
+      "greeting_guest": "Guest",
+      "open_menu": "Open user menu",
+      "profile_card": {
+        "role_badge": "{{role}}",
+        "phone_label": "Phone:",
+        "id_label": "ID:"
+      },
+      "logout": {
+        "label": "Logout",
+        "aria_label": "Log out of account"
+      }
+    },
+    "overlay": {
+      "click_outside_to_close": "Click outside to close"
+    }
+  },
+  "ru": {
+    "search": {
+      "placeholder": "Поиск",
+      "aria_label": "Поиск"
+    },
+    "notifications": {
+      "aria_label": "Уведомления",
+      "badge_alt": "{{count}} непрочитанных уведомлений"
+    },
+    "language": {
+      "selector_label": "Язык",
+      "menu_aria_label": "Выбор языка",
+      "selected": "{{name}}",
+      "dropdown_indicator": "Открыть меню языков",
+      "reset_hint": "Язык изменён на: {{name}}",
+      "list": {
+        "en": { "name": "Английский", "flag": "🇺🇸" },
+        "es": { "name": "Испанский", "flag": "🇪🇸" },
+        "fr": { "name": "Французский", "flag": "🇫🇷" },
+        "de": { "name": "Немецкий", "flag": "🇩🇪" },
+        "it": { "name": "Итальянский", "flag": "🇮🇹" },
+        "pt": { "name": "Португальский", "flag": "🇵🇹" },
+        "ru": { "name": "Русский", "flag": "🇷🇺" },
+        "zh": { "name": "Китайский", "flag": "🇨🇳" },
+        "ja": { "name": "Японский", "flag": "🇯🇵" },
+        "ar": { "name": "Арабский", "flag": "🇸🇦" }
+      }
+    },
+    "user_menu": {
+      "avatar_alt": "Аватар пользователя",
+      "greeting_guest": "Гость",
+      "open_menu": "Открыть меню пользователя",
+      "profile_card": {
+        "role_badge": "{{role}}",
+        "phone_label": "Телефон:",
+        "id_label": "ID:"
+      },
+      "logout": {
+        "label": "Выйти",
+        "aria_label": "Выйти из аккаунта"
+      }
+    },
+    "overlay": {
+      "click_outside_to_close": "Нажмите вне окна, чтобы закрыть"
+    }
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "en": {
+    "breadcrumbs": {
+      "root": "Vehicles",
+      "back": "Back to Vehicles",
+      "details": "Vehicle Details",
+      "requested_id": "(Requested ID: {{id}})"
+    },
+    "loading": {
+      "vehicle": "Loading vehicle details (ID: {{id}})..."
+    },
+    "status": {
+      "badge_active": "Active",
+      "badge_inactive": "Inactive",
+      "online": "Online",
+      "offline": "Offline"
+    },
+    "profile": {
+      "title": "{{make}} {{model}}",
+      "plate_and_code": "Plate: {{plate}} • Code: {{code}}"
+    },
+    "stats": {
+      "connection_status": "Connection Status",
+      "make": "Make",
+      "model": "Model",
+      "seats": "Seats",
+      "taxi_park_id": "Taxi Park ID"
+    },
+    "sections": {
+      "vehicle_details": "Vehicle Details",
+      "specifications": "Technical Specifications",
+      "documentation": "Documentation",
+      "system_info": "System Information"
+    },
+    "fields": {
+      "plate_number": "Plate Number",
+      "vehicle_code": "Vehicle Code",
+      "make": "Make",
+      "model": "Model",
+      "color": "Color",
+      "seats": "Number of Seats",
+      "driver_id": "Driver ID",
+      "vin_full": "VIN (Vehicle Identification Number)",
+      "body_number": "Body Number",
+      "license_info": "License Information",
+      "registration_certificate": "Registration Certificate",
+      "vehicle_id": "Vehicle ID",
+      "taxi_park_id": "Taxi Park ID"
+    },
+    "buttons": {
+      "try_again": "Try Again",
+      "back_to_vehicles": "Back to Vehicles",
+      "save": "Save Details",
+      "saving": "Saving..."
+    },
+    "empty": {
+      "not_found_title": "Vehicle not found",
+      "not_found_subtitle": "Requested vehicle ID: {{id}}"
+    },
+    "errors": {
+      "generic_prefix": "Failed to fetch vehicle details:",
+      "no_id": "No vehicle ID provided",
+      "workaround_note": "Using workaround: Fetching all vehicles and filtering by ID"
+    },
+    "toasts": {
+      "update_success": "Vehicle details updated successfully",
+      "update_error": "Failed to update vehicle: {{message}}",
+      "no_id_update": "No vehicle ID available for update"
+    },
+    "aria": {
+      "toggle_section_open": "Open {{section}} section",
+      "toggle_section_close": "Close {{section}} section",
+      "save_details": "Save vehicle details"
+    },
+    "placeholders": {
+      "driver_id": "Enter driver ID or leave empty"
+    }
+  },
+  "ru": {
+    "breadcrumbs": {
+      "root": "Автопарк",
+      "back": "Назад к автомобилям",
+      "details": "Детали автомобиля",
+      "requested_id": "(Запрошенный ID: {{id}})"
+    },
+    "loading": {
+      "vehicle": "Загрузка данных автомобиля (ID: {{id}})..."
+    },
+    "status": {
+      "badge_active": "Активно",
+      "badge_inactive": "Неактивно",
+      "online": "Онлайн",
+      "offline": "Оффлайн"
+    },
+    "profile": {
+      "title": "{{make}} {{model}}",
+      "plate_and_code": "Номер: {{plate}} • Код: {{code}}"
+    },
+    "stats": {
+      "connection_status": "Статус подключения",
+      "make": "Марка",
+      "model": "Модель",
+      "seats": "Места",
+      "taxi_park_id": "ID таксопарка"
+    },
+    "sections": {
+      "vehicle_details": "Данные автомобиля",
+      "specifications": "Технические характеристики",
+      "documentation": "Документы",
+      "system_info": "Системная информация"
+    },
+    "fields": {
+      "plate_number": "Госномер",
+      "vehicle_code": "Код автомобиля",
+      "make": "Марка",
+      "model": "Модель",
+      "color": "Цвет",
+      "seats": "Количество мест",
+      "driver_id": "ID водителя",
+      "vin_full": "VIN (идентификационный номер)",
+      "body_number": "Номер кузова",
+      "license_info": "Информация о лицензии",
+      "registration_certificate": "Свидетельство о регистрации",
+      "vehicle_id": "ID автомобиля",
+      "taxi_park_id": "ID таксопарка"
+    },
+    "buttons": {
+      "try_again": "Повторить",
+      "back_to_vehicles": "Назад к автомобилям",
+      "save": "Сохранить",
+      "saving": "Сохранение..."
+    },
+    "empty": {
+      "not_found_title": "Автомобиль не найден",
+      "not_found_subtitle": "Запрошенный ID: {{id}}"
+    },
+    "errors": {
+      "generic_prefix": "Не удалось получить данные автомобиля:",
+      "no_id": "Не указан ID автомобиля",
+      "workaround_note": "Используется обходной путь: загрузка всех авто и фильтрация по ID"
+    },
+    "toasts": {
+      "update_success": "Данные автомобиля успешно обновлены",
+      "update_error": "Не удалось обновить автомобиль: {{message}}",
+      "no_id_update": "Нет ID автомобиля для обновления"
+    },
+    "aria": {
+      "toggle_section_open": "Открыть секцию «{{section}}»",
+      "toggle_section_close": "Закрыть секцию «{{section}}»",
+      "save_details": "Сохранить данные автомобиля"
+    },
+    "placeholders": {
+      "driver_id": "Укажите ID водителя или оставьте пустым"
+    }
+  }
+}

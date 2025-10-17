@@ -1,0 +1,248 @@
+{
+  "en": {
+    "header": {
+      "back_to": "Back to Vehicles",
+      "breadcrumb_left": "Vehicles",
+      "breadcrumb_arrow": "→",
+      "breadcrumb_right": "Add New Vehicle",
+      "title": "Add New Vehicle"
+    },
+    "sections": {
+      "vehicle_details": "Vehicle Details",
+      "vehicle_code": "Vehicle Code",
+      "facilities": "Facilities",
+      "options_brandings": "Options & Brandings"
+    },
+    "fields": {
+      "status": "Status",
+      "make": "Make",
+      "model": "Model",
+      "color": "Color",
+      "seats": "Seat Number",
+      "plate_number": "License plate Number *",
+      "vin": "VIN *",
+      "body_number": "Body Number",
+      "license": "License",
+      "registration_certificate": "Vehicle Registration Certificate",
+      "code": "Vehicle Code",
+      "facility_item": "Facility",
+      "transmission": "Transmission"
+    },
+    "selects": {
+      "status": {
+        "placeholder": "Select Status",
+        "options": {
+          "active": "Active",
+          "inactive": "Inactive",
+          "maintenance": "Under Maintenance",
+          "retired": "Retired"
+        }
+      },
+      "make": {
+        "placeholder": "Select Make",
+        "options": {
+          "Toyota": "Toyota",
+          "Honda": "Honda",
+          "BMW": "BMW",
+          "Mercedes-Benz": "Mercedes-Benz",
+          "Audi": "Audi",
+          "Volkswagen": "Volkswagen",
+          "Ford": "Ford",
+          "Chevrolet": "Chevrolet",
+          "Nissan": "Nissan",
+          "Hyundai": "Hyundai"
+        }
+      },
+      "model": {
+        "placeholder": "Select Model",
+        "options": {
+          "Camry": "Camry",
+          "Corolla": "Corolla",
+          "Civic": "Civic",
+          "Accord": "Accord",
+          "X5": "X5",
+          "3 Series": "3 Series",
+          "C-Class": "C-Class",
+          "A4": "A4",
+          "Golf": "Golf",
+          "Focus": "Focus"
+        }
+      },
+      "color": {
+        "placeholder": "Select Color",
+        "options": {
+          "White": "White",
+          "Black": "Black",
+          "Silver": "Silver",
+          "Gray": "Gray",
+          "Blue": "Blue",
+          "Red": "Red",
+          "Green": "Green",
+          "Yellow": "Yellow"
+        }
+      }
+    },
+    "placeholders": {
+      "seats": "4",
+      "plate_number": "DL-1420190012345",
+      "vin": "DL-1420190012345",
+      "body_number": "DL-1420190012345",
+      "license": "DL-1420190012345",
+      "registration_certificate": "DL-1420190012345",
+      "code": "Enter a unique code for the vehicle",
+      "facility_item": "Please add from here",
+      "transmission": "Please add from here"
+    },
+    "buttons": {
+      "toggle_section_aria": "Toggle section",
+      "add_facility": "Add",
+      "remove_facility_aria": "Remove facility",
+      "submit": "Add Vehicle"
+    },
+    "lists": {
+      "facilities_header_add": "Add"
+    },
+    "toasts": {
+      "success_add": "Vehicle added successfully!",
+      "error_add": "Failed to add vehicle"
+    },
+    "validation": {
+      "plate_required": "License plate number is required",
+      "make_required": "Make is required",
+      "model_required": "Model is required",
+      "vin_required": "VIN is required"
+    },
+    "aria": {
+      "loading": "Loading",
+      "back_button": "Go back to vehicles",
+      "submit_button": "Save vehicle",
+      "status_select": "Select vehicle status",
+      "make_select": "Select vehicle make",
+      "model_select": "Select vehicle model",
+      "color_select": "Select vehicle color"
+    }
+  },
+  "ru": {
+    "header": {
+      "back_to": "Назад к автопарку",
+      "breadcrumb_left": "Автопарк",
+      "breadcrumb_arrow": "→",
+      "breadcrumb_right": "Добавить автомобиль",
+      "title": "Добавить новый автомобиль"
+    },
+    "sections": {
+      "vehicle_details": "Данные автомобиля",
+      "vehicle_code": "Код автомобиля",
+      "facilities": "Оснащение",
+      "options_brandings": "Опции и брендинг"
+    },
+    "fields": {
+      "status": "Статус",
+      "make": "Марка",
+      "model": "Модель",
+      "color": "Цвет",
+      "seats": "Количество мест",
+      "plate_number": "Номерной знак *",
+      "vin": "VIN *",
+      "body_number": "Номер кузова",
+      "license": "Лицензия",
+      "registration_certificate": "Свидетельство о регистрации",
+      "code": "Код автомобиля",
+      "facility_item": "Оснащение",
+      "transmission": "Трансмиссия"
+    },
+    "selects": {
+      "status": {
+        "placeholder": "Выберите статус",
+        "options": {
+          "active": "Активен",
+          "inactive": "Неактивен",
+          "maintenance": "На обслуживании",
+          "retired": "Списан"
+        }
+      },
+      "make": {
+        "placeholder": "Выберите марку",
+        "options": {
+          "Toyota": "Toyota",
+          "Honda": "Honda",
+          "BMW": "BMW",
+          "Mercedes-Benz": "Mercedes-Benz",
+          "Audi": "Audi",
+          "Volkswagen": "Volkswagen",
+          "Ford": "Ford",
+          "Chevrolet": "Chevrolet",
+          "Nissan": "Nissan",
+          "Hyundai": "Hyundai"
+        }
+      },
+      "model": {
+        "placeholder": "Выберите модель",
+        "options": {
+          "Camry": "Camry",
+          "Corolla": "Corolla",
+          "Civic": "Civic",
+          "Accord": "Accord",
+          "X5": "X5",
+          "3 Series": "3 Series",
+          "C-Class": "C-Class",
+          "A4": "A4",
+          "Golf": "Golf",
+          "Focus": "Focus"
+        }
+      },
+      "color": {
+        "placeholder": "Выберите цвет",
+        "options": {
+          "White": "Белый",
+          "Black": "Чёрный",
+          "Silver": "Серебристый",
+          "Gray": "Серый",
+          "Blue": "Синий",
+          "Red": "Красный",
+          "Green": "Зелёный",
+          "Yellow": "Жёлтый"
+        }
+      }
+    },
+    "placeholders": {
+      "seats": "4",
+      "plate_number": "DL-1420190012345",
+      "vin": "DL-1420190012345",
+      "body_number": "DL-1420190012345",
+      "license": "DL-1420190012345",
+      "registration_certificate": "DL-1420190012345",
+      "code": "Введите уникальный код для автомобиля",
+      "facility_item": "Добавьте здесь",
+      "transmission": "Добавьте здесь"
+    },
+    "buttons": {
+      "toggle_section_aria": "Свернуть/развернуть раздел",
+      "add_facility": "Добавить",
+      "remove_facility_aria": "Удалить строку оснащения",
+      "submit": "Добавить автомобиль"
+    },
+    "lists": {
+      "facilities_header_add": "Добавить"
+    },
+    "toasts": {
+      "success_add": "Автомобиль успешно добавлен!",
+      "error_add": "Не удалось добавить автомобиль"
+    },
+    "validation": {
+      "plate_required": "Требуется номерной знак",
+      "make_required": "Требуется марка",
+      "model_required": "Требуется модель",
+      "vin_required": "Требуется VIN"
+    },
+    "aria": {
+      "loading": "Загрузка",
+      "back_button": "Вернуться к списку автомобилей",
+      "submit_button": "Сохранить автомобиль",
+      "status_select": "Выбор статуса автомобиля",
+      "make_select": "Выбор марки автомобиля",
+      "model_select": "Выбор модели автомобиля",
+      "color_select": "Выбор цвета автомобиля"
+    }
+  }
+}

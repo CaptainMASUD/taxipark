@@ -1,0 +1,100 @@
+{
+  "en": {
+    "header": {
+      "title": "Driver's Earning Report"
+    },
+    "filters": {
+      "filter_by_chip": "Filter By",
+      "from_label": "From:",
+      "to_label": "To:",
+      "apply": "Apply",
+      "reset": "Reset Filter",
+      "active_range_tag": "Report from {{from}} to {{to}}"
+    },
+    "table": {
+      "columns": {
+        "driver_name": "Driver's Name",
+        "vehicle_code": "Vehicle Code",
+        "mileage_km": "Mileage, km",
+        "total_earning": "Total Earning"
+      },
+      "currency_prefix": "BYN",
+      "empty_for_range": "No earning data found for the selected period."
+    },
+    "loading": {
+      "page": "Loading earning report..."
+    },
+    "errors": {
+      "generic": "Failed to fetch earning report",
+      "network": "Network error"
+    },
+    "toasts": {
+      "fetch_failed": "Failed to fetch earning report",
+      "reset_done": "Filter reset to last 7 days"
+    },
+    "pagination": {
+      "showing_entries": "Showing {{count}} entries",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "{{page}}"
+    },
+    "buttons": {
+      "retry": "Retry"
+    },
+    "aria": {
+      "apply_filters": "Apply filters",
+      "reset_filters": "Reset filters to default",
+      "date_from": "Start date",
+      "date_to": "End date"
+    }
+  },
+  "ru": {
+    "header": {
+      "title": "Отчёт по доходам водителей"
+    },
+    "filters": {
+      "filter_by_chip": "Фильтр",
+      "from_label": "С:",
+      "to_label": "По:",
+      "apply": "Применить",
+      "reset": "Сбросить фильтр",
+      "active_range_tag": "Отчёт с {{from}} по {{to}}"
+    },
+    "table": {
+      "columns": {
+        "driver_name": "Имя водителя",
+        "vehicle_code": "Код автомобиля",
+        "mileage_km": "Пробег, км",
+        "total_earning": "Общий доход"
+      },
+      "currency_prefix": "BYN",
+      "empty_for_range": "Данные о доходах за выбранный период не найдены."
+    },
+    "loading": {
+      "page": "Загрузка отчёта по доходам..."
+    },
+    "errors": {
+      "generic": "Не удалось получить отчёт по доходам",
+      "network": "Сетевая ошибка"
+    },
+    "toasts": {
+      "fetch_failed": "Не удалось получить отчёт по доходам",
+      "reset_done": "Фильтр сброшен на последние 7 дней"
+    },
+    "pagination": {
+      "showing_entries": "Показано записей: {{count}}",
+      "previous": "Назад",
+      "next": "Далее",
+      "page": "{{page}}"
+    },
+    "buttons": {
+      "retry": "Повторить"
+    },
+    "aria": {
+      "apply_filters": "Применить фильтры",
+      "reset_filters": "Сбросить фильтры по умолчанию",
+      "date_from": "Дата начала",
+      "date_to": "Дата окончания"
+    }
+  }
+}

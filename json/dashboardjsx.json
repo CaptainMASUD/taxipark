@@ -1,0 +1,96 @@
+{
+  "en": {
+    "tabs": {
+      "dashboard": "Dashboard",
+      "staff": "Staff",
+      "vehicles": "Vehicles",
+      "report": "Report",
+      "earning_report": "Earning Report",
+      "ride_report": "Ride Report",
+      "order_report": "Order Report"
+    },
+    "breadcrumbs": {
+      "vehicles": "Vehicles",
+      "arrow": "→",
+      "vehicle_details": "Vehicle Details"
+    },
+    "vehicle_details": {
+      "page_title": "Vehicle Details for {{make}} {{model}}",
+      "description": "Details for vehicle ID: {{id}} coming soon...",
+      "back_button": "Back to Vehicles"
+    },
+    "driver_details": {
+      "page_title": "Driver Details",
+      "back_button": "Back to Staff"
+    },
+    "actions": {
+      "add_driver": "Add Driver",
+      "add_vehicle": "Add Vehicle"
+    },
+    "forms": {
+      "add_driver_title": "Add New Driver",
+      "add_vehicle_title": "Add New Vehicle",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "back": "Back"
+    },
+    "navbar": {
+      "title": "Dashboard",
+      "search_placeholder": "Search…",
+      "notifications": "Notifications",
+      "profile": "Profile"
+    },
+    "messages": {
+      "new_driver_logged": "New driver data:",
+      "new_vehicle_logged": "New vehicle data:",
+      "coming_soon": "Coming soon..."
+    }
+  },
+  "ru": {
+    "tabs": {
+      "dashboard": "Панель",
+      "staff": "Персонал",
+      "vehicles": "Автопарк",
+      "report": "Отчёты",
+      "earning_report": "Отчёт по доходам",
+      "ride_report": "Отчёт по поездкам",
+      "order_report": "Отчёт по заказам"
+    },
+    "breadcrumbs": {
+      "vehicles": "Автопарк",
+      "arrow": "→",
+      "vehicle_details": "Детали автомобиля"
+    },
+    "vehicle_details": {
+      "page_title": "Детали автомобиля {{make}} {{model}}",
+      "description": "Информация для автомобиля с ID: {{id}} скоро будет доступна…",
+      "back_button": "Назад к автопарку"
+    },
+    "driver_details": {
+      "page_title": "Детали водителя",
+      "back_button": "Назад к персоналу"
+    },
+    "actions": {
+      "add_driver": "Добавить водителя",
+      "add_vehicle": "Добавить автомобиль"
+    },
+    "forms": {
+      "add_driver_title": "Добавить нового водителя",
+      "add_vehicle_title": "Добавить новый автомобиль",
+      "submit": "Сохранить",
+      "cancel": "Отмена",
+      "back": "Назад"
+    },
+    "navbar": {
+      "title": "Панель",
+      "search_placeholder": "Поиск…",
+      "notifications": "Уведомления",
+      "profile": "Профиль"
+    },
+    "messages": {
+      "new_driver_logged": "Данные нового водителя:",
+      "new_vehicle_logged": "Данные нового автомобиля:",
+      "coming_soon": "Скоро будет…"
+    }
+  }
+}

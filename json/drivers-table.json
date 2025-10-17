@@ -1,0 +1,158 @@
+{
+  "en": {
+    "header": {
+      "title": "Drivers",
+      "add_button": "Add Driver"
+    },
+    "search": {
+      "placeholder": "Search drivers...",
+      "refresh_title": "Refresh"
+    },
+    "bulk_actions": {
+      "selected_count": "{{count}} selected",
+      "connect_all": "Connect All",
+      "disconnect_all": "Disconnect All"
+    },
+    "table": {
+      "select_all_aria": "Select all drivers",
+      "columns": {
+        "name": "Full Name",
+        "phone": "Phone Number",
+        "email": "Email",
+        "license": "Driver's License",
+        "connection": "Connection",
+        "fare": "Current Price/km",
+        "actions": "Actions"
+      },
+      "connection_options": {
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "fare_input_aria": "Set price per km",
+      "action_edit_title": "Edit",
+      "action_more_title": "More"
+    },
+    "empty": {
+      "no_results_with_query": "No drivers found matching your search.",
+      "no_results": "No drivers found."
+    },
+    "pagination": {
+      "showing": "Showing {{visible}} of {{total}} drivers",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "{{page}}"
+    },
+    "loading": {
+      "drivers": "Loading drivers...",
+      "modal_message": "Loading driver details..."
+    },
+    "errors": {
+      "fetch_failed": "Failed to fetch drivers",
+      "generic": "Something went wrong"
+    },
+    "toasts": {
+      "fetch_failed": "Failed to fetch drivers",
+      "connection_updated": "Driver connection status updated",
+      "connection_failed": "Failed to update connection status",
+      "fare_updated": "Driver fare updated",
+      "fare_failed": "Failed to update fare",
+      "bulk_updated": "Updated {{count}} drivers",
+      "bulk_failed": "Failed to update drivers",
+      "add_success": "Driver added successfully",
+      "add_failed": "Failed to add driver",
+      "more_options": "More options for {{name}}",
+      "id_missing": "Driver ID not found"
+    },
+    "dialogs": {
+      "loading_title": "Please wait"
+    },
+    "buttons": {
+      "retry": "Retry"
+    },
+    "avatars": {
+      "fallback": "U"
+    },
+    "status_dot": {
+      "online": "Online",
+      "offline": "Offline"
+    }
+  },
+  "ru": {
+    "header": {
+      "title": "Водители",
+      "add_button": "Добавить водителя"
+    },
+    "search": {
+      "placeholder": "Поиск водителей...",
+      "refresh_title": "Обновить"
+    },
+    "bulk_actions": {
+      "selected_count": "Выбрано: {{count}}",
+      "connect_all": "Подключить всех",
+      "disconnect_all": "Отключить всех"
+    },
+    "table": {
+      "select_all_aria": "Выбрать всех водителей",
+      "columns": {
+        "name": "Полное имя",
+        "phone": "Телефон",
+        "email": "Эл. почта",
+        "license": "Водительское удостоверение",
+        "connection": "Подключение",
+        "fare": "Текущая цена/км",
+        "actions": "Действия"
+      },
+      "connection_options": {
+        "active": "Активен",
+        "inactive": "Неактивен"
+      },
+      "fare_input_aria": "Установить цену за км",
+      "action_edit_title": "Редактировать",
+      "action_more_title": "Ещё"
+    },
+    "empty": {
+      "no_results_with_query": "По вашему запросу водители не найдены.",
+      "no_results": "Водители не найдены."
+    },
+    "pagination": {
+      "showing": "Показано {{visible}} из {{total}} водителей",
+      "previous": "Назад",
+      "next": "Далее",
+      "page": "{{page}}"
+    },
+    "loading": {
+      "drivers": "Загрузка списка водителей...",
+      "modal_message": "Загрузка данных водителя..."
+    },
+    "errors": {
+      "fetch_failed": "Не удалось получить список водителей",
+      "generic": "Произошла ошибка"
+    },
+    "toasts": {
+      "fetch_failed": "Не удалось получить список водителей",
+      "connection_updated": "Статус подключения водителя обновлён",
+      "connection_failed": "Не удалось обновить статус подключения",
+      "fare_updated": "Тариф водителя обновлён",
+      "fare_failed": "Не удалось обновить тариф",
+      "bulk_updated": "Обновлено водителей: {{count}}",
+      "bulk_failed": "Не удалось обновить водителей",
+      "add_success": "Водитель успешно добавлен",
+      "add_failed": "Не удалось добавить водителя",
+      "more_options": "Дополнительные опции для {{name}}",
+      "id_missing": "ID водителя не найден"
+    },
+    "dialogs": {
+      "loading_title": "Пожалуйста, подождите"
+    },
+    "buttons": {
+      "retry": "Повторить"
+    },
+    "avatars": {
+      "fallback": "U"
+    },
+    "status_dot": {
+      "online": "В сети",
+      "offline": "Не в сети"
+    }
+  }
+}

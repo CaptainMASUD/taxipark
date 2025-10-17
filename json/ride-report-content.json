@@ -1,0 +1,138 @@
+{
+  "en": {
+    "header": {
+      "title": "Ride Report"
+    },
+    "filters": {
+      "chip": "Filter By",
+      "from_label": "From:",
+      "to_label": "To:",
+      "driver_all": "All Drivers",
+      "status_all": "All Status",
+      "status_options": {
+        "completed": "Completed",
+        "cancelled": "Cancelled",
+        "ongoing": "Ongoing",
+        "active": "Active"
+      },
+      "reset": "Reset",
+      "active_range_tag": "Report from {{from}} to {{to}}"
+    },
+    "table": {
+      "columns": {
+        "status": "Status",
+        "driver_name": "Driver's Name",
+        "vehicle_code": "Vehicle Code",
+        "pickup": "Pickup Details",
+        "destination": "Destination Details",
+        "mileage_km": "Mileage, km",
+        "price_km": "Price, km",
+        "earning": "Earning",
+        "rating_by_passenger": "Ratings by Passenger",
+        "rating_by_driver": "Ratings by Driver"
+      },
+      "scroll_hint": "← Scroll to view more columns →",
+      "empty_for_range": "No rides found for the selected period"
+    },
+    "loading": {
+      "page": "Loading ride report...",
+      "more": "Loading..."
+    },
+    "errors": {
+      "generic": "Failed to fetch ride report",
+      "network": "Network error"
+    },
+    "toasts": {
+      "no_rides_for_range": "No rides found for the selected range",
+      "fetch_failed": "Failed to fetch ride report"
+    },
+    "footer": {
+      "showing_count": "Showing {{count}} rides",
+      "load_more": "Load More"
+    },
+    "buttons": {
+      "retry": "Retry",
+      "apply": "Apply"
+    },
+    "aria": {
+      "date_from": "Start date",
+      "date_to": "End date",
+      "driver_select": "Filter by driver",
+      "status_select": "Filter by status",
+      "reset_filters": "Reset filters to default",
+      "load_more": "Load more rides"
+    },
+    "badges": {
+      "unknown": "Unknown",
+      "in_progress": "In progress"
+    }
+  },
+  "ru": {
+    "header": {
+      "title": "Отчёт по поездкам"
+    },
+    "filters": {
+      "chip": "Фильтр",
+      "from_label": "С:",
+      "to_label": "По:",
+      "driver_all": "Все водители",
+      "status_all": "Все статусы",
+      "status_options": {
+        "completed": "Завершена",
+        "cancelled": "Отменена",
+        "ongoing": "В процессе",
+        "active": "Активна"
+      },
+      "reset": "Сброс",
+      "active_range_tag": "Отчёт с {{from}} по {{to}}"
+    },
+    "table": {
+      "columns": {
+        "status": "Статус",
+        "driver_name": "Имя водителя",
+        "vehicle_code": "Код автомобиля",
+        "pickup": "Точка отправления",
+        "destination": "Точка назначения",
+        "mileage_km": "Пробег, км",
+        "price_km": "Цена, км",
+        "earning": "Доход",
+        "rating_by_passenger": "Оценка пассажира",
+        "rating_by_driver": "Оценка водителя"
+      },
+      "scroll_hint": "← Прокрутите, чтобы увидеть больше столбцов →",
+      "empty_for_range": "По выбранному периоду поездки не найдены"
+    },
+    "loading": {
+      "page": "Загрузка отчёта по поездкам...",
+      "more": "Загрузка..."
+    },
+    "errors": {
+      "generic": "Не удалось получить отчёт по поездкам",
+      "network": "Сетевая ошибка"
+    },
+    "toasts": {
+      "no_rides_for_range": "По выбранному диапазону поездок не найдено",
+      "fetch_failed": "Не удалось получить отчёт по поездкам"
+    },
+    "footer": {
+      "showing_count": "Показано поездок: {{count}}",
+      "load_more": "Загрузить ещё"
+    },
+    "buttons": {
+      "retry": "Повторить",
+      "apply": "Применить"
+    },
+    "aria": {
+      "date_from": "Дата начала",
+      "date_to": "Дата окончания",
+      "driver_select": "Фильтр по водителю",
+      "status_select": "Фильтр по статусу",
+      "reset_filters": "Сбросить фильтры по умолчанию",
+      "load_more": "Загрузить больше поездок"
+    },
+    "badges": {
+      "unknown": "Неизвестно",
+      "in_progress": "В процессе"
+    }
+  }
+}

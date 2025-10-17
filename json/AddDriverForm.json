@@ -1,0 +1,142 @@
+{
+  "en": {
+    "header": {
+      "breadcrumb_left": "Drivers",
+      "breadcrumb_arrow": "→",
+      "breadcrumb_right": "New Driver",
+      "title": "Drivers → New Driver",
+      "close_tooltip": "Close"
+    },
+    "sections": {
+      "details": "Details",
+      "personal_details": "Personal Details",
+      "id_details": "ID Details"
+    },
+    "fields": {
+      "full_name": "Full Name",
+      "date_of_birth": "Date of Birth",
+      "phone_number": "Phone Number",
+      "email": "Email Address",
+      "address": "Address",
+      "city": "City",
+      "state": "State/Province",
+      "license_number": "Driver's License Number",
+      "license_expiry": "License Expiry Date",
+      "vehicle_make": "Vehicle Make",
+      "vehicle_model": "Vehicle Model",
+      "vehicle_year": "Vehicle Year",
+      "plate_number": "License Plate Number",
+      "emergency_contact": "Emergency Contact Name",
+      "emergency_phone": "Emergency Contact Phone"
+    },
+    "selects": {
+      "state": {
+        "placeholder": "Select state",
+        "options": {
+          "NY": "New York",
+          "CA": "California",
+          "TX": "Texas"
+        }
+      }
+    },
+    "placeholders": {
+      "full_name": "Enter full name",
+      "phone_number": "+1 (XXX) XXX-XXXX",
+      "email": "Enter email address",
+      "address": "Enter full address",
+      "city": "Enter city",
+      "license_number": "DL-XXXXXXXXXXXXXXX",
+      "vehicle_make": "e.g., Toyota, Honda",
+      "vehicle_model": "e.g., Camry, Civic",
+      "vehicle_year": "2020",
+      "plate_number": "ABC-1234",
+      "emergency_contact": "Enter emergency contact name",
+      "emergency_phone": "+1 (XXX) XXX-XXXX"
+    },
+    "buttons": {
+      "submit": "Add Driver",
+      "collapse_toggle_aria": "Toggle section",
+      "close": "Close"
+    },
+    "aria": {
+      "dialog_label": "Add Driver form",
+      "form_label": "New Driver details form",
+      "close_button": "Close form",
+      "submit_button": "Submit new driver"
+    },
+    "messages": {
+      "submit_success": "Driver added successfully",
+      "submit_error": "Failed to add driver"
+    }
+  },
+  "ru": {
+    "header": {
+      "breadcrumb_left": "Водители",
+      "breadcrumb_arrow": "→",
+      "breadcrumb_right": "Новый водитель",
+      "title": "Водители → Новый водитель",
+      "close_tooltip": "Закрыть"
+    },
+    "sections": {
+      "details": "Данные",
+      "personal_details": "Личные данные",
+      "id_details": "Документы"
+    },
+    "fields": {
+      "full_name": "Полное имя",
+      "date_of_birth": "Дата рождения",
+      "phone_number": "Номер телефона",
+      "email": "Электронная почта",
+      "address": "Адрес",
+      "city": "Город",
+      "state": "Штат/Провинция",
+      "license_number": "Номер водительского удостоверения",
+      "license_expiry": "Срок действия удостоверения",
+      "vehicle_make": "Марка автомобиля",
+      "vehicle_model": "Модель автомобиля",
+      "vehicle_year": "Год выпуска",
+      "plate_number": "Номерной знак",
+      "emergency_contact": "Контактное лицо (экстренный случай)",
+      "emergency_phone": "Телефон контакта (экстренный случай)"
+    },
+    "selects": {
+      "state": {
+        "placeholder": "Выберите штат",
+        "options": {
+          "NY": "Нью-Йорк",
+          "CA": "Калифорния",
+          "TX": "Техас"
+        }
+      }
+    },
+    "placeholders": {
+      "full_name": "Введите полное имя",
+      "phone_number": "+1 (XXX) XXX-XXXX",
+      "email": "Введите электронную почту",
+      "address": "Введите полный адрес",
+      "city": "Введите город",
+      "license_number": "DL-XXXXXXXXXXXXXXX",
+      "vehicle_make": "например, Toyota, Honda",
+      "vehicle_model": "например, Camry, Civic",
+      "vehicle_year": "2020",
+      "plate_number": "ABC-1234",
+      "emergency_contact": "Введите имя контактного лица",
+      "emergency_phone": "+1 (XXX) XXX-XXXX"
+    },
+    "buttons": {
+      "submit": "Добавить водителя",
+      "collapse_toggle_aria": "Свернуть/развернуть раздел",
+      "close": "Закрыть"
+    },
+    "aria": {
+      "dialog_label": "Форма добавления водителя",
+      "form_label": "Форма данных нового водителя",
+      "close_button": "Закрыть форму",
+      "submit_button": "Отправить нового водителя"
+    },
+    "messages": {
+      "submit_success": "Водитель успешно добавлен",
+      "submit_error": "Не удалось добавить водителя"
+    }
+  }
+}

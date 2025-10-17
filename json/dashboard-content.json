@@ -1,0 +1,170 @@
+{
+  "en": {
+    "page": {
+      "title": "Dashboard",
+      "loading": "Loading dashboard...",
+      "refresh": "Refresh"
+    },
+    "taxi_park_card": {
+      "title_fallback": "Taxi Park",
+      "id_label": "Id:",
+      "email_label": "Email",
+      "quick_stats": {
+        "active_drivers": "Active Drivers",
+        "active_vehicles": "Active Vehicles"
+      },
+      "user_title": "{{name}}",
+      "user_id": "{{userId}}",
+      "user_email": "{{email}}"
+    },
+    "charts": {
+      "activity": {
+        "title": "Activity",
+        "cta_report": "Report →",
+        "xaxis_label": "Day",
+        "yaxis_label": "Value",
+        "series_label": "Activity"
+      },
+      "hours_online": {
+        "title": "Hours Online",
+        "cta_report": "Report →",
+        "delta": "-20%",
+        "total_hours": "367 Hours",
+        "series_label": "Hours"
+      },
+      "trips": {
+        "title": "Trips",
+        "cta_report": "Report →",
+        "completed_label": "Completed: {{count}}",
+        "series_label": "Trips"
+      }
+    },
+    "lists": {
+      "connected_drivers": {
+        "title": "Connected Drivers",
+        "hint": "Info",
+        "online_count": "{{count}} online",
+        "empty_state_title": "No drivers currently online",
+        "driver_name_fallback": "Unknown Driver",
+        "driver_id_label": "ID: {{id}}",
+        "status_online": "Online"
+      }
+    },
+    "live_metrics": {
+      "title": "Live Metrics",
+      "active_drivers": "Active Drivers",
+      "of_total": "/ {{total}}",
+      "active_vehicles": "Active Vehicles",
+      "total_vehicles": "Total Vehicles",
+      "revenue_today": "Revenue Today",
+      "revenue_today_value": "${{amount}}",
+      "driver_connection_rate": "Driver Connection Rate"
+    },
+    "messages": {
+      "api_error_title": "Error",
+      "api_error_generic": "Failed to fetch dashboard data",
+      "api_error_network": "Network error",
+      "drivers_response_log": "Drivers response:",
+      "vehicles_response_log": "Vehicles response:"
+    },
+    "placeholders": {
+      "days_short": {
+        "sun": "Sun",
+        "mon": "Mon",
+        "tues": "Tues",
+        "wed": "Wed",
+        "thurs": "Thurs",
+        "fri": "Fri",
+        "sat": "Sat"
+      }
+    },
+    "aria": {
+      "open_report": "Open full report",
+      "refresh_metrics": "Refresh live metrics"
+    }
+  },
+  "ru": {
+    "page": {
+      "title": "Панель",
+      "loading": "Загрузка панели...",
+      "refresh": "Обновить"
+    },
+    "taxi_park_card": {
+      "title_fallback": "Таксопарк",
+      "id_label": "ID:",
+      "email_label": "Эл. почта",
+      "quick_stats": {
+        "active_drivers": "Активные водители",
+        "active_vehicles": "Активные автомобили"
+      },
+      "user_title": "{{name}}",
+      "user_id": "{{userId}}",
+      "user_email": "{{email}}"
+    },
+    "charts": {
+      "activity": {
+        "title": "Активность",
+        "cta_report": "Отчёт →",
+        "xaxis_label": "День",
+        "yaxis_label": "Значение",
+        "series_label": "Активность"
+      },
+      "hours_online": {
+        "title": "Часы онлайн",
+        "cta_report": "Отчёт →",
+        "delta": "-20%",
+        "total_hours": "367 часов",
+        "series_label": "Часы"
+      },
+      "trips": {
+        "title": "Поездки",
+        "cta_report": "Отчёт →",
+        "completed_label": "Завершено: {{count}}",
+        "series_label": "Поездки"
+      }
+    },
+    "lists": {
+      "connected_drivers": {
+        "title": "Подключённые водители",
+        "hint": "Инфо",
+        "online_count": "{{count}} в сети",
+        "empty_state_title": "Сейчас нет водителей онлайн",
+        "driver_name_fallback": "Неизвестный водитель",
+        "driver_id_label": "ID: {{id}}",
+        "status_online": "В сети"
+      }
+    },
+    "live_metrics": {
+      "title": "Онлайн-метрики",
+      "active_drivers": "Активные водители",
+      "of_total": "/ {{total}}",
+      "active_vehicles": "Активные автомобили",
+      "total_vehicles": "Всего автомобилей",
+      "revenue_today": "Выручка сегодня",
+      "revenue_today_value": "${{amount}}",
+      "driver_connection_rate": "Доля подключённых водителей"
+    },
+    "messages": {
+      "api_error_title": "Ошибка",
+      "api_error_generic": "Не удалось получить данные панели",
+      "api_error_network": "Сетевая ошибка",
+      "drivers_response_log": "Ответ по водителям:",
+      "vehicles_response_log": "Ответ по автомобилям:"
+    },
+    "placeholders": {
+      "days_short": {
+        "sun": "Вс",
+        "mon": "Пн",
+        "tues": "Вт",
+        "wed": "Ср",
+        "thurs": "Чт",
+        "fri": "Пт",
+        "sat": "Сб"
+      }
+    },
+    "aria": {
+      "open_report": "Открыть полный отчёт",
+      "refresh_metrics": "Обновить онлайн-метрики"
+    }
+  }
+}
