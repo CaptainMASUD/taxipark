@@ -1,10 +1,13 @@
-import { useState } from "react"
-import { ChevronDown, ChevronRight, ArrowLeft, Save, Loader } from 'lucide-react'
+// src/components/AddDriverForm.jsx
+import { useState, useMemo } from "react";
+import { useSelector } from "react-redux";
+import { selectLanguageCode } from "../../Redux/LanguageSlice/languageSlice";
+import translations from "./json/add-driver-form.json"; // <-- your provided JSON
+import { ChevronDown, ChevronRight, ArrowLeft, Save, Loader } from "lucide-react";
 
-// Simple toast notification
-const showToast = (message, type = 'info') => {
-  const toast = document.createElement('div')
-  toast.textContent = message
+const showToast = (message, type = "info") => {
+  const toast = document.createElement("div");
+  toast.textContent = message;
   toast.style.cssText = `
     position: fixed;
     top: 20px;
@@ -16,29 +19,36 @@ const showToast = (message, type = 'info') => {
     z-index: 10000;
     transform: translateX(100%);
     transition: transform 0.3s ease;
-    ${type === 'success' ? 'background-color: #10b981;' : 
-      type === 'error' ? 'background-color: #ef4444;' : 
-      'background-color: #3b82f6;'}
-  `
-  
-  document.body.appendChild(toast)
-  
+    ${
+      type === "success"
+        ? "background-color: #10b981;"
+        : type === "error"
+        ? "background-color: #ef4444;"
+        : "background-color: #3b82f6;"
+    }
+  `;
+
+  document.body.appendChild(toast);
+
   setTimeout(() => {
-    toast.style.transform = 'translateX(0)'
-  }, 10)
-  
+    toast.style.transform = "translateX(0)";
+  }, 10);
+
   setTimeout(() => {
-    toast.style.transform = 'translateX(100%)'
+    toast.style.transform = "translateX(100%)";
     setTimeout(() => {
       if (document.body.contains(toast)) {
-        document.body.removeChild(toast)
+        document.body.removeChild(toast);
       }
-    }, 300)
-  }, 4000)
-}
+    }, 300);
+  }, 4000);
+};
 
 export default function AddDriverForm({ onBack, onSubmit }) {
-  const [loading, setLoading] = useState(false)
+  const lang = useSelector(selectLanguageCode); // 'en' | 'ru'
+  const t = useMemo(() => translations[lang] || translations.en, [lang]);
+
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     // Basic Information
     name: "",
@@ -48,104 +58,107 @@ export default function AddDriverForm({ onBack, onSubmit }) {
     address: "",
     emergencyContact: "",
     dateOfBirth: "",
-    
+
     // License Information
     licenseNumber: "",
     countryOfIssue: "",
     drivingLicenseIssuedOn: "",
     drivingLicenseExpeiresOn: "",
     drivingExperience: "",
-    
+
     // Personal Details
     passportType: "",
     country: "",
     issuedBy: "",
     registrationAddress: "",
     taxpayerId: "",
-    
+
     // ID Details
     idSeriesAndNumber: "",
     primaryStateRegistrationNumber: "",
     postCode: "",
     iDIssuedOn: "",
     iDexpiresOn: "",
-    
+
     // Additional
     notes: "",
     feedback: "",
-    status: "active"
-  })
+    status: "active",
+  });
 
   const [expandedSections, setExpandedSections] = useState({
     details: true,
     personalDetails: false,
     idDetails: false,
-  })
+  });
 
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
       ...prev,
       [section]: !prev[section],
-    }))
-  }
+    }));
+  };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const validateForm = () => {
-    const errors = []
-    
-    if (!formData.name.trim()) errors.push("Name is required")
-    if (!formData.email.trim()) errors.push("Email is required")
-    if (!formData.phone.trim()) errors.push("Phone is required")
-    if (!formData.password.trim()) errors.push("Password is required")
-    if (formData.password.length < 6) errors.push("Password must be at least 6 characters")
-    
+    const errors = [];
+
+    if (!formData.name.trim()) errors.push(t.validation.name_required);
+    if (!formData.email.trim()) errors.push(t.validation.email_required);
+    if (!formData.phone.trim()) errors.push(t.validation.phone_required);
+    if (!formData.password.trim()) errors.push(t.validation.password_required);
+    if (formData.password.length < 6)
+      errors.push(t.validation.password_min_length);
+
     if (errors.length > 0) {
-      errors.forEach(error => showToast(error, 'error'))
-      return false
+      errors.forEach((error) => showToast(error, "error"));
+      return false;
     }
-    
-    return true
-  }
+
+    return true;
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    
-    if (!validateForm()) return
-    
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
     try {
-      setLoading(true)
-      await onSubmit(formData)
+      setLoading(true);
+      await onSubmit(formData);
+      showToast(t.toasts.success_add, "success");
     } catch (err) {
-      showToast(err.message || 'Failed to add driver', 'error')
+      showToast(err?.message || t.toasts.error_add, "error");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="flex-1 bg-gray-900 text-white overflow-auto">
       {/* Header */}
       <div className="border-b border-gray-700 p-6">
         <div className="flex items-center text-sm text-gray-400 mb-4">
-          <button 
+          <button
             onClick={onBack}
+            aria-label={t.aria.back_button}
             className="flex items-center text-blue-400 hover:text-blue-300 mr-4"
           >
             <ArrowLeft className="w-4 h-4 mr-1" />
-            Back to Drivers
+            {t.header.back_to}
           </button>
-          <span>Drivers</span>
-          <span className="mx-2">→</span>
-          <span className="text-white">Add New Driver</span>
+          <span>{t.header.breadcrumb_left}</span>
+          <span className="mx-2">{t.header.breadcrumb_arrow}</span>
+          <span className="text-white">{t.header.breadcrumb_right}</span>
         </div>
-        <h1 className="text-2xl font-bold text-white">Add New Driver</h1>
+        <h1 className="text-2xl font-bold text-white">{t.header.title}</h1>
       </div>
 
       <div className="p-6 max-w-6xl mx-auto">
@@ -154,10 +167,13 @@ export default function AddDriverForm({ onBack, onSubmit }) {
           <div className="border border-gray-700 rounded-lg overflow-hidden">
             <button
               type="button"
+              aria-label={t.buttons.toggle_section_aria}
               onClick={() => toggleSection("details")}
               className="w-full flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 transition-colors text-left"
             >
-              <span className="text-white font-medium">Basic Details</span>
+              <span className="text-white font-medium">
+                {t.sections.basic_details}
+              </span>
               {expandedSections.details ? (
                 <ChevronDown className="w-5 h-5 text-gray-400" />
               ) : (
@@ -169,83 +185,97 @@ export default function AddDriverForm({ onBack, onSubmit }) {
               <div className="p-6 bg-gray-800 border-t border-gray-700">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Full Name *</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.name}
+                    </label>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      placeholder="Enter full name"
+                      placeholder={t.placeholders.name}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Email *</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.email}
+                    </label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      placeholder="Enter email address"
+                      placeholder={t.placeholders.email}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Phone Number *</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.phone}
+                    </label>
                     <input
                       type="tel"
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      placeholder="Enter phone number"
+                      placeholder={t.placeholders.phone}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Password *</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.password}
+                    </label>
                     <input
                       type="password"
                       name="password"
                       value={formData.password}
                       onChange={handleInputChange}
-                      placeholder="Enter password (min 6 characters)"
+                      placeholder={t.placeholders.password}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Driver License Number</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.licenseNumber}
+                    </label>
                     <input
                       type="text"
                       name="licenseNumber"
                       value={formData.licenseNumber}
                       onChange={handleInputChange}
-                      placeholder="Enter license number"
+                      placeholder={t.placeholders.licenseNumber}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Country of Issue</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.countryOfIssue}
+                    </label>
                     <input
                       type="text"
                       name="countryOfIssue"
                       value={formData.countryOfIssue}
                       onChange={handleInputChange}
-                      placeholder="Enter country of issue"
+                      placeholder={t.placeholders.countryOfIssue}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">License Issued On</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.drivingLicenseIssuedOn}
+                    </label>
                     <input
                       type="date"
                       name="drivingLicenseIssuedOn"
@@ -256,7 +286,9 @@ export default function AddDriverForm({ onBack, onSubmit }) {
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">License Expires On</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.drivingLicenseExpeiresOn /* keep key as is */}
+                    </label>
                     <input
                       type="date"
                       name="drivingLicenseExpeiresOn"
@@ -267,7 +299,9 @@ export default function AddDriverForm({ onBack, onSubmit }) {
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Date of Birth</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.dateOfBirth}
+                    </label>
                     <input
                       type="date"
                       name="dateOfBirth"
@@ -278,50 +312,64 @@ export default function AddDriverForm({ onBack, onSubmit }) {
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Emergency Contact</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.emergencyContact}
+                    </label>
                     <input
                       type="text"
                       name="emergencyContact"
                       value={formData.emergencyContact}
                       onChange={handleInputChange}
-                      placeholder="Enter emergency contact"
+                      placeholder={t.placeholders.emergencyContact}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Driving Experience</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.drivingExperience}
+                    </label>
                     <input
                       type="text"
                       name="drivingExperience"
                       value={formData.drivingExperience}
                       onChange={handleInputChange}
-                      placeholder="e.g., 5 years"
+                      placeholder={t.placeholders.drivingExperience}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Status</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.status}
+                    </label>
                     <select
                       name="status"
                       value={formData.status}
                       onChange={handleInputChange}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     >
-                      <option value="active">Active</option>
-                      <option value="inactive">Inactive</option>
-                      <option value="pending">Pending</option>
+                      <option value="active">
+                        {t.selects.status.options.active}
+                      </option>
+                      <option value="inactive">
+                        {t.selects.status.options.inactive}
+                      </option>
+                      <option value="pending">
+                        {t.selects.status.options.pending}
+                      </option>
                     </select>
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm text-gray-300 mb-2">Address</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.address}
+                    </label>
                     <textarea
                       name="address"
                       value={formData.address}
                       onChange={handleInputChange}
-                      placeholder="Enter full address"
+                      placeholder={t.placeholders.address}
                       rows={3}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     />
@@ -335,10 +383,13 @@ export default function AddDriverForm({ onBack, onSubmit }) {
           <div className="border border-gray-700 rounded-lg overflow-hidden">
             <button
               type="button"
+              aria-label={t.buttons.toggle_section_aria}
               onClick={() => toggleSection("personalDetails")}
               className="w-full flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 transition-colors text-left"
             >
-              <span className="text-white font-medium">Personal Details</span>
+              <span className="text-white font-medium">
+                {t.sections.personal_details}
+              </span>
               {expandedSections.personalDetails ? (
                 <ChevronDown className="w-5 h-5 text-gray-400" />
               ) : (
@@ -350,60 +401,70 @@ export default function AddDriverForm({ onBack, onSubmit }) {
               <div className="p-6 bg-gray-800 border-t border-gray-700">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Passport Type</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.passportType}
+                    </label>
                     <input
                       type="text"
                       name="passportType"
                       value={formData.passportType}
                       onChange={handleInputChange}
-                      placeholder="Enter passport type"
+                      placeholder={t.placeholders.passportType}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Country</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.country}
+                    </label>
                     <input
                       type="text"
                       name="country"
                       value={formData.country}
                       onChange={handleInputChange}
-                      placeholder="Enter country"
+                      placeholder={t.placeholders.country}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Issued By</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.issuedBy}
+                    </label>
                     <input
                       type="text"
                       name="issuedBy"
                       value={formData.issuedBy}
                       onChange={handleInputChange}
-                      placeholder="Enter issuing authority"
+                      placeholder={t.placeholders.issuedBy}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Taxpayer ID</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.taxpayerId}
+                    </label>
                     <input
                       type="text"
                       name="taxpayerId"
                       value={formData.taxpayerId}
                       onChange={handleInputChange}
-                      placeholder="Enter taxpayer ID"
+                      placeholder={t.placeholders.taxpayerId}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm text-gray-300 mb-2">Registration Address</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.registrationAddress}
+                    </label>
                     <textarea
                       name="registrationAddress"
                       value={formData.registrationAddress}
                       onChange={handleInputChange}
-                      placeholder="Enter registration address"
+                      placeholder={t.placeholders.registrationAddress}
                       rows={3}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     />
@@ -417,10 +478,13 @@ export default function AddDriverForm({ onBack, onSubmit }) {
           <div className="border border-gray-700 rounded-lg overflow-hidden">
             <button
               type="button"
+              aria-label={t.buttons.toggle_section_aria}
               onClick={() => toggleSection("idDetails")}
               className="w-full flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 transition-colors text-left"
             >
-              <span className="text-white font-medium">ID Details</span>
+              <span className="text-white font-medium">
+                {t.sections.id_details}
+              </span>
               {expandedSections.idDetails ? (
                 <ChevronDown className="w-5 h-5 text-gray-400" />
               ) : (
@@ -432,43 +496,51 @@ export default function AddDriverForm({ onBack, onSubmit }) {
               <div className="p-6 bg-gray-800 border-t border-gray-700">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">ID Series and Number</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.idSeriesAndNumber}
+                    </label>
                     <input
                       type="text"
                       name="idSeriesAndNumber"
                       value={formData.idSeriesAndNumber}
                       onChange={handleInputChange}
-                      placeholder="Enter ID series and number"
+                      placeholder={t.placeholders.idSeriesAndNumber}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Primary State Registration Number</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.primaryStateRegistrationNumber}
+                    </label>
                     <input
                       type="text"
                       name="primaryStateRegistrationNumber"
                       value={formData.primaryStateRegistrationNumber}
                       onChange={handleInputChange}
-                      placeholder="Enter registration number"
+                      placeholder={t.placeholders.primaryStateRegistrationNumber}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">Post Code</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.postCode}
+                    </label>
                     <input
                       type="text"
                       name="postCode"
                       value={formData.postCode}
                       onChange={handleInputChange}
-                      placeholder="Enter post code"
+                      placeholder={t.placeholders.postCode}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">ID Issued On</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.iDIssuedOn}
+                    </label>
                     <input
                       type="date"
                       name="iDIssuedOn"
@@ -479,7 +551,9 @@ export default function AddDriverForm({ onBack, onSubmit }) {
                   </div>
 
                   <div>
-                    <label className="block text-sm text-gray-300 mb-2">ID Expires On</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.iDexpiresOn}
+                    </label>
                     <input
                       type="date"
                       name="iDexpiresOn"
@@ -490,12 +564,14 @@ export default function AddDriverForm({ onBack, onSubmit }) {
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm text-gray-300 mb-2">Notes</label>
+                    <label className="block text-sm text-gray-300 mb-2">
+                      {t.fields.notes}
+                    </label>
                     <textarea
                       name="notes"
                       value={formData.notes}
                       onChange={handleInputChange}
-                      placeholder="Enter any additional notes"
+                      placeholder={t.placeholders.notes}
                       rows={3}
                       className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                     />
@@ -510,11 +586,12 @@ export default function AddDriverForm({ onBack, onSubmit }) {
             <button
               type="submit"
               disabled={loading}
+              aria-label={t.aria.submit_button}
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg transition-colors font-medium flex items-center space-x-2 disabled:opacity-50"
             >
               {loading && <Loader className="w-4 h-4 animate-spin" />}
               <Save className="w-4 h-4" />
-              <span>Add Driver</span>
+              <span>{t.buttons.submit}</span>
             </button>
           </div>
         </form>
@@ -524,12 +601,16 @@ export default function AddDriverForm({ onBack, onSubmit }) {
         .animate-spin {
           animation: spin 1s linear infinite;
         }
-        
+
         @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
         }
       `}</style>
     </div>
-  )
+  );
 }

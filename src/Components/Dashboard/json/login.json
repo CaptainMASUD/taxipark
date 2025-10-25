@@ -1,0 +1,126 @@
+{
+  "en": {
+    "brand": "TaxiPark",
+    "header": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to your TaxiPark account"
+    },
+    "form": {
+      "email_label": "Email Address",
+      "email_placeholder": "Enter your email",
+      "password_label": "Password",
+      "password_placeholder": "Enter your password",
+      "remember_me": "Remember me",
+      "forgot_password": "Forgot password?",
+      "sign_in": "Sign In"
+    },
+    "footer": {
+      "no_account": "Don't have an account?",
+      "sign_up": "Sign up"
+    },
+    "loading": {
+      "app": "Loading...",
+      "drivers": "Loading drivers..."
+    },
+    "toast": {
+      "welcome": "Welcome back, {{name}}!",
+      "logout_success": "Logged out successfully",
+      "generic_error": "Something went wrong",
+      "drivers_fetch_failed": "Failed to fetch drivers",
+      "conn_updated": "Driver connection status updated",
+      "conn_failed": "Failed to update connection status",
+      "fare_updated": "Driver fare updated",
+      "fare_failed": "Failed to update fare",
+      "drivers_bulk_updated": "Updated {{count}} drivers",
+      "drivers_bulk_failed": "Failed to update drivers"
+    },
+    "errors": {
+      "email_required": "Email is required",
+      "email_invalid": "Email is invalid",
+      "password_required": "Password is required",
+      "password_min": "Password must be at least 6 characters"
+    },
+    "drivers": {
+      "dashboard_title": "TaxiPark Dashboard",
+      "welcome_back": "Welcome back, {{name}}",
+      "logout": "Logout",
+      "search_placeholder": "Search drivers...",
+      "connect_selected": "Connect Selected ({{count}})",
+      "disconnect_selected": "Disconnect Selected",
+      "table": {
+        "driver": "Driver",
+        "license": "License",
+        "status": "Status",
+        "fare_km": "Fare/KM",
+        "no_results": "No drivers found"
+      }
+    },
+    "lang": {
+      "menu_label": "Language",
+      "en": { "name": "English", "flag": "🇺🇸" },
+      "ru": { "name": "Русский", "flag": "🇷🇺" }
+    }
+  },
+  "ru": {
+    "brand": "TaxiPark",
+    "header": {
+      "title": "С возвращением",
+      "subtitle": "Войдите в свой аккаунт TaxiPark"
+    },
+    "form": {
+      "email_label": "Email адрес",
+      "email_placeholder": "Введите ваш email",
+      "password_label": "Пароль",
+      "password_placeholder": "Введите ваш пароль",
+      "remember_me": "Запомнить меня",
+      "forgot_password": "Забыли пароль?",
+      "sign_in": "Войти"
+    },
+    "footer": {
+      "no_account": "Нет аккаунта?",
+      "sign_up": "Зарегистрироваться"
+    },
+    "loading": {
+      "app": "Загрузка...",
+      "drivers": "Загрузка водителей..."
+    },
+    "toast": {
+      "welcome": "С возвращением, {{name}}!",
+      "logout_success": "Вы вышли из системы",
+      "generic_error": "Что-то пошло не так",
+      "drivers_fetch_failed": "Не удалось загрузить водителей",
+      "conn_updated": "Статус подключения водителя обновлён",
+      "conn_failed": "Не удалось изменить статус подключения",
+      "fare_updated": "Тариф водителя обновлён",
+      "fare_failed": "Не удалось обновить тариф",
+      "drivers_bulk_updated": "Обновлено водителей: {{count}}",
+      "drivers_bulk_failed": "Не удалось обновить водителей"
+    },
+    "errors": {
+      "email_required": "Требуется email",
+      "email_invalid": "Некорректный email",
+      "password_required": "Требуется пароль",
+      "password_min": "Пароль должен быть не менее 6 символов"
+    },
+    "drivers": {
+      "dashboard_title": "Панель TaxiPark",
+      "welcome_back": "С возвращением, {{name}}",
+      "logout": "Выйти",
+      "search_placeholder": "Поиск водителей...",
+      "connect_selected": "Подключить выбранных ({{count}})",
+      "disconnect_selected": "Отключить выбранных",
+      "table": {
+        "driver": "Водитель",
+        "license": "Лицензия",
+        "status": "Статус",
+        "fare_km": "Тариф/км",
+        "no_results": "Водители не найдены"
+      }
+    },
+    "lang": {
+      "menu_label": "Язык",
+      "en": { "name": "English", "flag": "🇺🇸" },
+      "ru": { "name": "Русский", "flag": "🇷🇺" }
+    }
+  }
+}

@@ -1,4 +1,10 @@
-import { useState, useEffect } from "react"
+"use client"
+
+import { useState, useEffect, useMemo } from "react"
+import { useSelector } from "react-redux"
+import { selectLanguageCode } from "../../Redux/LanguageSlice/languageSlice"
+import tjson from "./json/VehicleDetails.json"
+
 import { ChevronDown, ChevronRight, ArrowLeft, Loader, Save, AlertCircle } from 'lucide-react'
 import axios from 'axios'
 
@@ -6,22 +12,16 @@ const API_BASE_URL = 'http://localhost:3000/api'
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  headers: { 'Content-Type': 'application/json' },
 })
 
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('authToken') || 'mock-token'
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    }
+    if (token) config.headers.Authorization = `Bearer ${token}`
     return config
   },
-  (error) => {
-    return Promise.reject(error)
-  }
+  (error) => Promise.reject(error)
 )
 
 apiClient.interceptors.response.use(
@@ -36,38 +36,26 @@ const showToast = (message, type = 'info') => {
   const toast = document.createElement('div')
   toast.textContent = message
   toast.style.cssText = `
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 12px 16px;
-    border-radius: 6px;
-    color: white;
-    font-weight: 500;
-    z-index: 10000;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-    ${type === 'success' ? 'background-color: #10b981;' : 
-      type === 'error' ? 'background-color: #ef4444;' : 
-      'background-color: #3b82f6;'}
+    position: fixed; top: 20px; right: 20px;
+    padding: 12px 16px; border-radius: 6px; color: white; font-weight: 500;
+    z-index: 10000; transform: translateX(100%); transition: transform .3s ease;
+    ${type === 'success' ? 'background-color:#10b981;' : type === 'error' ? 'background-color:#ef4444;' : 'background-color:#3b82f6;'}
   `
-  
   document.body.appendChild(toast)
-  
-  setTimeout(() => {
-    toast.style.transform = 'translateX(0)'
-  }, 10)
-  
+  setTimeout(() => { toast.style.transform = 'translateX(0)' }, 10)
   setTimeout(() => {
     toast.style.transform = 'translateX(100%)'
-    setTimeout(() => {
-      if (document.body.contains(toast)) {
-        document.body.removeChild(toast)
-      }
-    }, 300)
+    setTimeout(() => { if (document.body.contains(toast)) document.body.removeChild(toast) }, 300)
   }, 4000)
 }
 
 export default function VehicleDetails({ selectedVehicleId, onBack, onUpdate }) {
+  // i18n
+  const langCode = useSelector(selectLanguageCode) // 'en' | 'ru'
+  const t = useMemo(() => tjson?.[langCode] || tjson.en, [langCode])
+  const tr = (tpl = '', vars = {}) =>
+    (tpl || '').replace(/\{\{\s*(\w+)\s*\}\}/g, (_, k) => `${vars[k] ?? ''}`)
+
   const [vehicle, setVehicle] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -97,48 +85,29 @@ export default function VehicleDetails({ selectedVehicleId, onBack, onUpdate }) 
     try {
       setLoading(true)
       setError(null)
-      
-      console.log('Fetching vehicle details for ID:', vehicleId)
-      
+
+      // Try single vehicle endpoint first
       try {
         const response = await apiClient.get(`/taxipark/vehicles/${vehicleId}`)
-        console.log('Individual vehicle API response:', response)
-        
         const vehicleData = response.vehicle || response.vehicles || response
-        console.log('Vehicle data:', vehicleData)
-        
         if (vehicleData) {
           setVehicle(vehicleData)
           updateFormData(vehicleData)
           return
         }
-      } catch (individualError) {
-        console.log('Individual API failed, trying workaround:', individualError.message)
+      } catch {
+        // Fallback to list + filter
       }
-      
+
       const response = await apiClient.get('/taxipark/vehicles')
-      console.log('All vehicles API response:', response)
-      
       const allVehicles = response.vehicles || []
-      console.log('All vehicles:', allVehicles)
-      
-      const specificVehicle = allVehicles.find(v => {
-        console.log(`Comparing vehicle ${v.make} ${v.model} - ID: ${v.id} with requested ID: ${vehicleId}`)
-        return String(v.id) === String(vehicleId)
-      })
-      
-      console.log('Found specific vehicle:', specificVehicle)
-      
-      if (!specificVehicle) {
-        throw new Error(`Vehicle with ID ${vehicleId} not found`)
-      }
-      
+      const specificVehicle = allVehicles.find(v => String(v.id) === String(vehicleId))
+      if (!specificVehicle) throw new Error(tr(t.errors.no_id) || `Vehicle ${vehicleId} not found`)
+
       setVehicle(specificVehicle)
       updateFormData(specificVehicle)
-      
     } catch (err) {
-      console.error('Error fetching vehicle details:', err)
-      setError(`Failed to fetch vehicle details: ${err.message}`)
+      setError(`${t.errors.generic_prefix} ${err.message}`)
     } finally {
       setLoading(false)
     }
@@ -161,73 +130,55 @@ export default function VehicleDetails({ selectedVehicleId, onBack, onUpdate }) 
   }
 
   useEffect(() => {
-    console.log('VehicleDetails useEffect - selectedVehicleId:', selectedVehicleId)
     if (selectedVehicleId) {
       fetchVehicleDetails(selectedVehicleId)
     } else {
-      setError('No vehicle ID provided')
+      setError(t.errors.no_id)
       setLoading(false)
     }
-  }, [selectedVehicleId])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedVehicleId, langCode])
 
   const toggleSection = (section) => {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [section]: !prev[section],
-    }))
+    setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }))
   }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSave = async () => {
     if (!selectedVehicleId) {
-      showToast('No vehicle ID available for update', 'error')
+      showToast(t.toasts.no_id_update, 'error')
       return
     }
-
     try {
       setSaving(true)
-      console.log('Updating vehicle with ID:', selectedVehicleId)
-      console.log('Form data to save:', formData)
-      
-      const response = await apiClient.put(`/taxipark/vehicles/${selectedVehicleId}`, formData)
-      console.log('Update response:', response)
-      
-      showToast('Vehicle details updated successfully', 'success')
-      
-      if (onUpdate) {
-        onUpdate()
-      }
-      
+      await apiClient.put(`/taxipark/vehicles/${selectedVehicleId}`, formData)
+      showToast(t.toasts.update_success, 'success')
+      onUpdate?.()
       await fetchVehicleDetails(selectedVehicleId)
-      
     } catch (err) {
-      console.error('Error updating vehicle:', err)
-      showToast(`Failed to update vehicle: ${err.message}`, 'error')
+      showToast(tr(t.toasts.update_error, { message: err.message }), 'error')
     } finally {
       setSaving(false)
     }
   }
 
-  // Show loading state
+  // Loading
   if (loading) {
     return (
       <div className="flex-1 bg-gray-900 text-white flex items-center justify-center">
         <div className="flex items-center space-x-2">
           <Loader className="w-6 h-6 animate-spin" />
-          <span>Loading vehicle details (ID: {selectedVehicleId})...</span>
+          <span>{tr(t.loading.vehicle, { id: selectedVehicleId })}</span>
         </div>
       </div>
     )
   }
 
-  // Show error state
+  // Error
   if (error) {
     return (
       <div className="flex-1 bg-gray-900 text-white flex items-center justify-center">
@@ -235,24 +186,22 @@ export default function VehicleDetails({ selectedVehicleId, onBack, onUpdate }) 
           <AlertCircle className="w-12 h-12 text-red-400" />
           <div className="text-red-400 text-lg">{error}</div>
           <div className="text-gray-400 text-sm">
-            Requested vehicle ID: {selectedVehicleId}
+            {tr(t.breadcrumbs.requested_id, { id: selectedVehicleId })}
           </div>
-          <div className="text-gray-400 text-xs">
-            Using workaround: Fetching all vehicles and filtering by ID
-          </div>
+          <div className="text-gray-400 text-xs">{t.errors.workaround_note}</div>
           <div className="flex space-x-4">
             <button
               onClick={() => selectedVehicleId && fetchVehicleDetails(selectedVehicleId)}
               className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
               disabled={!selectedVehicleId}
             >
-              Try Again
+              {t.buttons.try_again}
             </button>
             <button
               onClick={onBack}
               className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors"
             >
-              Back to Vehicles
+              {t.buttons.back_to_vehicles}
             </button>
           </div>
         </div>
@@ -260,89 +209,92 @@ export default function VehicleDetails({ selectedVehicleId, onBack, onUpdate }) 
     )
   }
 
-
+  // Empty
   if (!vehicle) {
     return (
       <div className="flex-1 bg-gray-900 text-white flex items-center justify-center">
         <div className="flex flex-col items-center space-y-4 text-center">
           <AlertCircle className="w-12 h-12 text-yellow-400" />
-          <div className="text-yellow-400 text-lg">Vehicle not found</div>
-          <div className="text-gray-400 text-sm">Requested vehicle ID: {selectedVehicleId}</div>
+          <div className="text-yellow-400 text-lg">{t.empty.not_found_title}</div>
+          <div className="text-gray-400 text-sm">
+            {tr(t.empty.not_found_subtitle, { id: selectedVehicleId })}
+          </div>
           <button
             onClick={onBack}
             className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors"
           >
-            Back to Vehicles
+            {t.buttons.back_to_vehicles}
           </button>
         </div>
       </div>
     )
   }
 
-
-  const vehicleName = `${vehicle.make || 'Unknown'} ${vehicle.model || 'Vehicle'}`
-  const actualVehicleId = vehicle.id
+  const vehicleName = tr(t.profile.title, { make: vehicle.make || 'Unknown', model: vehicle.model || 'Vehicle' })
 
   return (
     <div className="flex-1 bg-gray-900 text-white overflow-auto">
       {/* Header */}
       <div className="border-b border-gray-700 p-6">
         <div className="flex items-center text-sm text-gray-400 mb-6">
-          <button 
+          <button
             onClick={onBack}
             className="flex items-center text-blue-400 hover:text-blue-300 mr-4"
+            aria-label={t.breadcrumbs.back}
+            title={t.breadcrumbs.back}
           >
             <ArrowLeft className="w-4 h-4 mr-1" />
-            Back to Vehicles
+            {t.breadcrumbs.back}
           </button>
-          <span>Vehicles</span>
+          <span>{t.breadcrumbs.root}</span>
           <span className="mx-2">→</span>
-          <span className="text-white">Vehicle Details</span>
-          <span className="mx-2 text-gray-500">(Requested ID: {selectedVehicleId})</span>
+          <span className="text-white">{t.breadcrumbs.details}</span>
+          <span className="mx-2 text-gray-500">{tr(t.breadcrumbs.requested_id, { id: selectedVehicleId })}</span>
         </div>
 
         {/* Vehicle Profile */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-lg bg-gray-600 flex items-center justify-center text-white font-bold text-2xl">
-              🚗
-            </div>
+            <div className="w-16 h-16 rounded-lg bg-gray-600 flex items-center justify-center text-white text-2xl">🚗</div>
             <div>
               <h1 className="text-2xl font-bold text-white">{vehicleName}</h1>
-              <p className="text-gray-400">Plate: {vehicle.plateNumber || 'N/A'} • Code: {vehicle.code || 'N/A'}</p>
-             
-             
+              <p className="text-gray-400">
+                {tr(t.profile.plate_and_code, {
+                  plate: vehicle.plateNumber || 'N/A',
+                  code: vehicle.code || 'N/A'
+                })}
+              </p>
             </div>
           </div>
           <div className={`px-3 py-1 rounded-full text-sm font-medium ${
-            vehicle.connectionStatus 
-              ? 'bg-green-600 text-white' 
-              : 'bg-gray-600 text-gray-300'
+            vehicle.connectionStatus ? 'bg-green-600 text-white' : 'bg-gray-600 text-gray-300'
           }`}>
-            ● {vehicle.connectionStatus ? 'Active' : 'Inactive'}
+            ● {vehicle.connectionStatus ? t.status.badge_active : t.status.badge_inactive}
           </div>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-5 gap-4 p-4 bg-gray-800 rounded-lg">
           <div className="text-center">
-            <p className="text-gray-400 text-sm mb-1">Connection Status</p>
-            <p className="text-white font-semibold">{vehicle.connectionStatus ? 'Online' : 'Offline'}</p>
+            <p className="text-gray-400 text-sm mb-1">{t.stats.connection_status}</p>
+            <p className="text-white font-semibold">
+              {vehicle.connectionStatus ? t.status.online : t.status.offline}
+            </p>
           </div>
           <div className="text-center">
-            <p className="text-gray-400 text-sm mb-1">Make</p>
+            <p className="text-gray-400 text-sm mb-1">{t.stats.make}</p>
             <p className="text-white font-semibold">{vehicle.make || 'N/A'}</p>
           </div>
           <div className="text-center">
-            <p className="text-gray-400 text-sm mb-1">Model</p>
+            <p className="text-gray-400 text-sm mb-1">{t.stats.model}</p>
             <p className="text-white font-semibold">{vehicle.model || 'N/A'}</p>
           </div>
           <div className="text-center">
-            <p className="text-gray-400 text-sm mb-1">Seats</p>
+            <p className="text-gray-400 text-sm mb-1">{t.stats.seats}</p>
             <p className="text-white font-semibold">{vehicle.seats || 'N/A'}</p>
           </div>
           <div className="text-center">
-            <p className="text-gray-400 text-sm mb-1">Taxi Park ID</p>
+            <p className="text-gray-400 text-sm mb-1">{t.stats.taxi_park_id}</p>
             <p className="text-white font-semibold">{vehicle.taxiParkId || 'N/A'}</p>
           </div>
         </div>
@@ -350,242 +302,157 @@ export default function VehicleDetails({ selectedVehicleId, onBack, onUpdate }) 
 
       <div className="p-6 max-w-6xl mx-auto">
         <div className="space-y-4">
-         
+          {/* Vehicle Details */}
           <div className="border border-gray-700 rounded-lg overflow-hidden">
             <button
               type="button"
               onClick={() => toggleSection("details")}
               className="w-full flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 transition-colors text-left"
+              aria-label={expandedSections.details ? tr(t.aria.toggle_section_close, { section: t.sections.vehicle_details }) : tr(t.aria.toggle_section_open, { section: t.sections.vehicle_details })}
+              aria-expanded={expandedSections.details}
             >
-              <span className="text-white font-medium">Vehicle Details</span>
-              {expandedSections.details ? (
-                <ChevronDown className="w-5 h-5 text-gray-400" />
-              ) : (
-                <ChevronRight className="w-5 h-5 text-gray-400" />
-              )}
+              <span className="text-white font-medium">{t.sections.vehicle_details}</span>
+              {expandedSections.details ? <ChevronDown className="w-5 h-5 text-gray-400" /> : <ChevronRight className="w-5 h-5 text-gray-400" />}
             </button>
 
             {expandedSections.details && (
               <div className="p-6 bg-gray-800 border-t border-gray-700">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm text-gray-300 mb-2">Plate Number</label>
-                    <input
-                      type="text"
-                      name="plateNumber"
-                      value={formData.plateNumber}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm text-gray-300 mb-2">Vehicle Code</label>
-                    <input
-                      type="text"
-                      name="code"
-                      value={formData.code}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm text-gray-300 mb-2">Make</label>
-                    <input
-                      type="text"
-                      name="make"
-                      value={formData.make}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm text-gray-300 mb-2">Model</label>
-                    <input
-                      type="text"
-                      name="model"
-                      value={formData.model}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm text-gray-300 mb-2">Color</label>
-                    <input
-                      type="text"
-                      name="color"
-                      value={formData.color}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm text-gray-300 mb-2">Number of Seats</label>
-                    <input
-                      type="number"
-                      name="seats"
-                      value={formData.seats}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <label className="block text-sm text-gray-300 mb-2">Driver ID</label>
-                    <input
-                      type="text"
-                      name="driverId"
-                      value={formData.driverId}
-                      onChange={handleInputChange}
-                      placeholder="Enter driver ID or leave empty"
-                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
+                  <Field label={t.fields.plate_number} name="plateNumber" value={formData.plateNumber} onChange={handleInputChange} />
+                  <Field label={t.fields.vehicle_code} name="code" value={formData.code} onChange={handleInputChange} />
+                  <Field label={t.fields.make} name="make" value={formData.make} onChange={handleInputChange} />
+                  <Field label={t.fields.model} name="model" value={formData.model} onChange={handleInputChange} />
+                  <Field label={t.fields.color} name="color" value={formData.color} onChange={handleInputChange} />
+                  <Field type="number" label={t.fields.seats} name="seats" value={formData.seats} onChange={handleInputChange} />
+                  <Field label={t.fields.driver_id} name="driverId" value={formData.driverId} onChange={handleInputChange} placeholder={t.placeholders.driver_id} className="md:col-span-2" />
                 </div>
               </div>
             )}
           </div>
 
-         
+          {/* Specifications */}
           <div className="border border-gray-700 rounded-lg overflow-hidden">
             <button
               type="button"
               onClick={() => toggleSection("specifications")}
               className="w-full flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 transition-colors text-left"
+              aria-label={expandedSections.specifications ? tr(t.aria.toggle_section_close, { section: t.sections.specifications }) : tr(t.aria.toggle_section_open, { section: t.sections.specifications })}
+              aria-expanded={expandedSections.specifications}
             >
-              <span className="text-white font-medium">Technical Specifications</span>
-              {expandedSections.specifications ? (
-                <ChevronDown className="w-5 h-5 text-gray-400" />
-              ) : (
-                <ChevronRight className="w-5 h-5 text-gray-400" />
-              )}
+              <span className="text-white font-medium">{t.sections.specifications}</span>
+              {expandedSections.specifications ? <ChevronDown className="w-5 h-5 text-gray-400" /> : <ChevronRight className="w-5 h-5 text-gray-400" />}
             </button>
 
             {expandedSections.specifications && (
               <div className="p-6 bg-gray-800 border-t border-gray-700">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm text-gray-300 mb-2">VIN (Vehicle Identification Number)</label>
-                    <input
-                      type="text"
-                      name="VIN"
-                      value={formData.VIN}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500 font-mono"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm text-gray-300 mb-2">Body Number</label>
-                    <input
-                      type="text"
-                      name="bodyNumber"
-                      value={formData.bodyNumber}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
+                  <Field label={t.fields.vin_full} name="VIN" value={formData.VIN} onChange={handleInputChange} inputClassName="font-mono" />
+                  <Field label={t.fields.body_number} name="bodyNumber" value={formData.bodyNumber} onChange={handleInputChange} />
                 </div>
               </div>
             )}
           </div>
 
-         
+          {/* Documentation */}
           <div className="border border-gray-700 rounded-lg overflow-hidden">
             <button
               type="button"
               onClick={() => toggleSection("documentation")}
               className="w-full flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 transition-colors text-left"
+              aria-label={expandedSections.documentation ? tr(t.aria.toggle_section_close, { section: t.sections.documentation }) : tr(t.aria.toggle_section_open, { section: t.sections.documentation })}
+              aria-expanded={expandedSections.documentation}
             >
-              <span className="text-white font-medium">Documentation</span>
-              {expandedSections.documentation ? (
-                <ChevronDown className="w-5 h-5 text-gray-400" />
-              ) : (
-                <ChevronRight className="w-5 h-5 text-gray-400" />
-              )}
+              <span className="text-white font-medium">{t.sections.documentation}</span>
+              {expandedSections.documentation ? <ChevronDown className="w-5 h-5 text-gray-400" /> : <ChevronRight className="w-5 h-5 text-gray-400" />}
             </button>
 
             {expandedSections.documentation && (
               <div className="p-6 bg-gray-800 border-t border-gray-700">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm text-gray-300 mb-2">License Information</label>
-                    <textarea
-                      name="license"
-                      value={formData.license}
-                      onChange={handleInputChange}
-                      rows={3}
-                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm text-gray-300 mb-2">Registration Certificate</label>
-                    <textarea
-                      name="registrationCertificate"
-                      value={formData.registrationCertificate}
-                      onChange={handleInputChange}
-                      rows={3}
-                      className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
+                  <TextArea label={t.fields.license_info} name="license" value={formData.license} onChange={handleInputChange} rows={3} />
+                  <TextArea label={t.fields.registration_certificate} name="registrationCertificate" value={formData.registrationCertificate} onChange={handleInputChange} rows={3} />
                 </div>
               </div>
             )}
           </div>
 
+          {/* System Info */}
           <div className="border border-gray-700 rounded-lg overflow-hidden">
             <div className="p-4 bg-gray-800">
-              <span className="text-white font-medium">System Information</span>
+              <span className="text-white font-medium">{t.sections.system_info}</span>
             </div>
             <div className="p-6 bg-gray-800 border-t border-gray-700">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm text-gray-300 mb-2">Vehicle ID</label>
-                  <div className="w-full bg-gray-700 text-gray-400 px-4 py-3 rounded-lg border border-gray-600">
-                    {vehicle.id}
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm text-gray-300 mb-2">Taxi Park ID</label>
-                  <div className="w-full bg-gray-700 text-gray-400 px-4 py-3 rounded-lg border border-gray-600">
-                    {vehicle.taxiParkId || 'N/A'}
-                  </div>
-                </div>
+                <ReadOnly label={t.fields.vehicle_id} value={vehicle.id} />
+                <ReadOnly label={t.fields.taxi_park_id} value={vehicle.taxiParkId || 'N/A'} />
               </div>
             </div>
           </div>
 
-          
+          {/* Save */}
           <div className="flex justify-center pt-6">
             <button
               type="button"
               onClick={handleSave}
               disabled={saving || !selectedVehicleId}
+              aria-label={t.aria.save_details}
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg transition-colors font-medium flex items-center space-x-2 disabled:opacity-50"
             >
               {saving && <Loader className="w-4 h-4 animate-spin" />}
               <Save className="w-4 h-4" />
-              <span>{saving ? 'Saving...' : 'Save Details'}</span>
+              <span>{saving ? t.buttons.saving : t.buttons.save}</span>
             </button>
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        .animate-spin {
-          animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
+        .animate-spin { animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
       `}</style>
+    </div>
+  )
+}
+
+/** Small presentational helpers **/
+function Field({ label, name, value, onChange, type = "text", placeholder, className = "", inputClassName = "" }) {
+  return (
+    <div className={className}>
+      <label className="block text-sm text-gray-300 mb-2">{label}</label>
+      <input
+        type={type}
+        name={name}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        className={`w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500 ${inputClassName}`}
+      />
+    </div>
+  )
+}
+
+function TextArea({ label, name, value, onChange, rows = 3 }) {
+  return (
+    <div>
+      <label className="block text-sm text-gray-300 mb-2">{label}</label>
+      <textarea
+        name={name}
+        value={value}
+        onChange={onChange}
+        rows={rows}
+        className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
+      />
+    </div>
+  )
+}
+
+function ReadOnly({ label, value }) {
+  return (
+    <div>
+      <label className="block text-sm text-gray-300 mb-2">{label}</label>
+      <div className="w-full bg-gray-700 text-gray-400 px-4 py-3 rounded-lg border border-gray-600">
+        {value}
+      </div>
     </div>
   )
 }

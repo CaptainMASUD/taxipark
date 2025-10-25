@@ -1,84 +1,128 @@
-"use client"
+"use client";
 
-import { Car, Users, FileText, DollarSign, ShoppingCart, MapPin, Settings, LogOut, ChevronDown, ChevronRight } from 'lucide-react'
-import { useState } from "react"
-import { useNavigate } from 'react-router-dom'
+import { useState, useMemo, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectLanguageCode } from "../../Redux/LanguageSlice/languageSlice";
 
-const sidebarItems = [
-  { name: "Dashboard", icon: FileText, type: "link" },
-  { name: "Staff", icon: Users, type: "link" },
-  { name: "Vehicles", icon: Car, type: "link" },
+import tjson from "./json/sidebar.json";
+
+import {
+  Car,
+  Users,
+  FileText,
+  DollarSign,
+  ShoppingCart,
+  MapPin,
+  Settings,
+  LogOut,
+  ChevronDown,
+  ChevronRight,
+} from "lucide-react";
+
+// Stable NAV KEYS (do not localize these)
+const RAW_ITEMS = [
+  { key: "dashboard", icon: FileText, type: "link" },
+  { key: "staff", icon: Users, type: "link" },
+  { key: "vehicles", icon: Car, type: "link" },
   {
-    name: "Report",
+    key: "report",
     icon: FileText,
     type: "parent",
     children: [
-      { name: "Earning Report", icon: DollarSign, type: "link" },
-      { name: "Order Report", icon: ShoppingCart, type: "link" },
-      { name: "Ride Report", icon: MapPin, type: "link" },
+      { key: "earning_report", icon: DollarSign, type: "link" },
+      // { key: "order_report", icon: ShoppingCart, type: "link" },
+      { key: "ride_report", icon: MapPin, type: "link" },
     ],
   },
-  { name: "Settings", icon: Settings, type: "link", bottom: true },
-  { name: "Logout", icon: LogOut, type: "logout", bottom: true },
-]
+  { key: "settings", icon: Settings, type: "link", bottom: true },
+  { key: "logout", icon: LogOut, type: "logout", bottom: true },
+];
 
-// Auth utility functions (same as navbar)
+// Auth utils (same behavior as before, but don't clear redux language)
 const clearUserFromStorage = () => {
   try {
-    localStorage.removeItem('authToken')
-    localStorage.removeItem('user')
-    localStorage.removeItem('selectedLanguage')
-  } catch (error) {
-    console.error('Error clearing user data:', error)
-  }
-}
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("user");
+  } catch {}
+};
 
 export default function Sidebar({ activeTab, onTabChange, onLogout }) {
-  const navigate = useNavigate()
-  const [reportExpanded, setReportExpanded] = useState(false)
+  const navigate = useNavigate();
+
+  // i18n
+  const langCode = useSelector(selectLanguageCode); // 'en' | 'ru'
+  const t = useMemo(() => tjson?.[langCode] || tjson.en, [langCode]);
+  const tr = (tpl = "", vars = {}) =>
+    tpl.replace(/\{\{\s*(\w+)\s*\}\}/g, (_, k) => `${vars[k] ?? ""}`);
+
+  // Map items to localized labels (display only)
+  const items = useMemo(() => {
+    const label = t.nav;
+    return RAW_ITEMS.map((it) => ({
+      ...it,
+      name: label[it.key] ?? it.key, // localized label for UI
+      children: it.children?.map((c) => ({
+        ...c,
+        name: label[c.key] ?? c.key, // localized child label
+      })),
+    }));
+  }, [t]);
+
+  // Auto-expand "Report" when a report child KEY is active
+  const [reportExpanded, setReportExpanded] = useState(false);
+  useEffect(() => {
+    const report = items.find((i) => i.key === "report");
+    if (!report) return;
+    const childKeys = new Set(report.children?.map((c) => c.key) || []);
+    setReportExpanded(childKeys.has(activeTab));
+  }, [items, activeTab]);
 
   const handleLogout = () => {
-    // Clear user data from localStorage
-    clearUserFromStorage()
-    
-    // Call the onLogout prop if provided
-    if (onLogout) {
-      onLogout()
+    if (window.confirm(tr(t.confirm.logout_message))) {
+      clearUserFromStorage();
+      onLogout?.();
+      navigate("/login");
     }
-    
-    // Navigate to login page
-    navigate('/login')
-  }
+  };
 
   const handleItemClick = (item) => {
-    if (item.type === "parent" && item.name === "Report") {
-      setReportExpanded(!reportExpanded)
-    } else if (item.type === "logout") {
-      handleLogout()
-    } else {
-      onTabChange(item.name)
+    if (item.type === "parent" && item.key === "report") {
+      setReportExpanded((prev) => !prev);
+      return;
     }
-  }
+    if (item.type === "logout") {
+      handleLogout();
+      return;
+    }
+    // Send STABLE KEY up
+    onTabChange?.(item.key);
+  };
 
   return (
-    <div className="w-64 bg-gray-800 flex flex-col h-full">
-      {/* Logo */}
+    <aside
+      className="w-64 bg-gray-800 flex flex-col h-full"
+      aria-label={t.aria.sidebar}
+    >
+      {/* Branding */}
       <div className="p-6 border-b border-gray-700">
-        <h1 className="text-xl font-bold text-blue-400">Auto Float</h1>
+        <h1 className="text-xl font-bold text-blue-400">{t.branding.app_name}</h1>
       </div>
 
       {/* Navigation */}
       <nav className="flex-1 p-4">
         <ul className="space-y-2">
-          {sidebarItems
-            .filter((item) => !item.bottom)
-            .map((item, index) => (
-              <li key={index}>
+          {items
+            .filter((i) => !i.bottom)
+            .map((item) => (
+              <li key={item.key}>
                 {item.type === "link" && (
                   <button
                     onClick={() => handleItemClick(item)}
+                    title={t.tooltips[item.key] || ""}
+                    aria-label={tr(t.aria.navigate_to, { label: item.name })}
                     className={`w-full flex items-center px-4 py-3 rounded-lg text-left transition-colors ${
-                      item.name === activeTab
+                      item.key === activeTab
                         ? "bg-blue-600 text-white"
                         : "text-gray-300 hover:bg-gray-700 hover:text-white"
                     }`}
@@ -92,9 +136,15 @@ export default function Sidebar({ activeTab, onTabChange, onLogout }) {
                   <>
                     <button
                       onClick={() => handleItemClick(item)}
+                      title={
+                        reportExpanded
+                          ? t.aria.close_report_menu
+                          : t.aria.open_report_menu
+                      }
+                      aria-expanded={reportExpanded}
                       className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-left transition-colors ${
-                        reportExpanded 
-                          ? "bg-gray-700 text-white" 
+                        reportExpanded
+                          ? "bg-gray-700 text-white"
                           : "text-gray-300 hover:bg-gray-700 hover:text-white"
                       }`}
                     >
@@ -111,18 +161,22 @@ export default function Sidebar({ activeTab, onTabChange, onLogout }) {
 
                     {reportExpanded && item.children && (
                       <ul className="ml-6 mt-2 space-y-2">
-                        {item.children.map((childItem, childIndex) => (
-                          <li key={childIndex}>
+                        {item.children.map((child) => (
+                          <li key={child.key}>
                             <button
-                              onClick={() => handleItemClick(childItem)}
+                              onClick={() => handleItemClick(child)}
+                              title={t.tooltips[child.key] || ""}
+                              aria-label={tr(t.aria.navigate_to, {
+                                label: child.name,
+                              })}
                               className={`w-full flex items-center px-4 py-3 rounded-lg text-left transition-colors ${
-                                childItem.name === activeTab
+                                child.key === activeTab
                                   ? "bg-blue-600 text-white"
                                   : "text-gray-300 hover:bg-gray-700 hover:text-white"
                               }`}
                             >
-                              <childItem.icon className="w-5 h-5 mr-3" />
-                              {childItem.name}
+                              <child.icon className="w-5 h-5 mr-3" />
+                              {child.name}
                             </button>
                           </li>
                         ))}
@@ -137,12 +191,18 @@ export default function Sidebar({ activeTab, onTabChange, onLogout }) {
 
       {/* Bottom Actions */}
       <div className="p-4 border-t border-gray-700">
-        {sidebarItems
-          .filter((item) => item.bottom)
-          .map((item, index) => (
+        {items
+          .filter((i) => i.bottom)
+          .map((item) => (
             <button
-              key={index}
+              key={item.key}
               onClick={() => handleItemClick(item)}
+              title={t.tooltips[item.key] || ""}
+              aria-label={
+                item.key === "logout"
+                  ? t.aria.logout
+                  : tr(t.aria.navigate_to, { label: item.name })
+              }
               className={`w-full flex items-center px-4 py-3 rounded-lg transition-colors mb-2 last:mb-0 ${
                 item.type === "logout"
                   ? "text-red-400 hover:bg-red-900/20 hover:text-red-300"
@@ -154,6 +214,6 @@ export default function Sidebar({ activeTab, onTabChange, onLogout }) {
             </button>
           ))}
       </div>
-    </div>
-  )
+    </aside>
+  );
 }

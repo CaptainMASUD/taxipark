@@ -1,8 +1,6 @@
 {
   "en": {
-    "branding": {
-      "app_name": "Auto Float"
-    },
+    "branding": { "app_name": "Auto Float" },
     "nav": {
       "dashboard": "Dashboard",
       "staff": "Staff",
@@ -13,12 +11,6 @@
       "ride_report": "Ride Report",
       "settings": "Settings",
       "logout": "Logout"
-    },
-    "states": {
-      "active": "Active",
-      "inactive": "Inactive",
-      "expanded": "Expanded",
-      "collapsed": "Collapsed"
     },
     "aria": {
       "sidebar": "Main sidebar navigation",
@@ -39,14 +31,11 @@
       "logout": "Sign out"
     },
     "confirm": {
-      "logout_title": "Logout",
       "logout_message": "Are you sure you want to log out?"
     }
   },
   "ru": {
-    "branding": {
-      "app_name": "Auto Float"
-    },
+    "branding": { "app_name": "Auto Float" },
     "nav": {
       "dashboard": "Панель",
       "staff": "Персонал",
@@ -57,12 +46,6 @@
       "ride_report": "Отчёт по поездкам",
       "settings": "Настройки",
       "logout": "Выйти"
-    },
-    "states": {
-      "active": "Активно",
-      "inactive": "Неактивно",
-      "expanded": "Развернуто",
-      "collapsed": "Свернуто"
     },
     "aria": {
       "sidebar": "Основная навигация боковой панели",
@@ -83,7 +66,6 @@
       "logout": "Выход из системы"
     },
     "confirm": {
-      "logout_title": "Выход",
       "logout_message": "Вы уверены, что хотите выйти?"
     }
   }
